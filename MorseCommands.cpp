@@ -300,6 +300,7 @@ void processCommand(String command) {
     bool stopped = false;
     if (isKochActive()) { stopKochSession(); stopped = true; }
     if (isEchoActive()) { stopEchoTraining(); stopped = true; }
+    if (isPracticeActive()) { stopPractice(); stopped = true; }
     if (!stopped) {
       Serial.println("No training session is running.");
     }
@@ -435,6 +436,10 @@ void readSerialInput() {
         Serial.println("\n[ESC] Stopping Echo...");
         stopEchoTraining();
       }
+      if (isPracticeActive()) {
+        Serial.println("\n[ESC] Stopping Practice...");
+        stopPractice();
+      }
       inputLine = "";
       continue;
     }
@@ -444,6 +449,7 @@ void readSerialInput() {
       bool stopped = false;
       if (isKochActive())  { Serial.println("\n[!] Stopping Koch...");  stopKochSession();  stopped = true; }
       if (isEchoActive())  { Serial.println("\n[!] Stopping Echo...");  stopEchoTraining(); stopped = true; }
+      if (isPracticeActive()) { Serial.println("\n[!] Stopping Practice..."); stopPractice(); stopped = true; }
       if (!stopped) {
         inputLine += c;
         Serial.write(c);

@@ -240,87 +240,20 @@ void updatePlayback() {
             }
         }
         else {
-            // Check for space in morse code (indicates internal character gap)
+            // Play next element (spaces in patterns should never exist)
             char element = playback.currentMorseCode[playback.codeIndex];
-
-            if (element == ' ') {
-                // Internal character gap (e.g., for % = 0/0)
-                Serial.print(" ");
-                playback.state = PlaybackState::InternalCharGap;
-                playback.stateStartTime = currentTime;
-                playback.stateDuration = CHAR_GAP_MS;
-                playback.codeIndex++;
-            }
-            else {
-                // Play next element
-                Serial.print(element);
-                signalOn();
-                playback.state = PlaybackState::SignalOn;
-                playback.stateStartTime = currentTime;
-                playback.stateDuration = (element == '.') ? DOT_MS : DASH_MS;
-            }
-        }
-        break;
-
-    case PlaybackState::InternalCharGap:
-        // After internal gap, play next element
-        if (playback.codeIndex >= (int)playback.currentMorseCode.length()) {
-            // Shouldn't happen, but handle gracefully
-            Serial.print(") ");
-            playback.messageIndex++;
-            playback.state = PlaybackState::CharGap;
+            Serial.print(element);
+            signalOn();
+            playback.state = PlaybackState::SignalOn;
             playback.stateStartTime = currentTime;
-            playback.stateDuration = 0;
-        }
-        else {
-            char element = playback.currentMorseCode[playback.codeIndex];
-
-            if (element == ' ') {
-                // Another space, skip it
-                playback.codeIndex++;
-                // Prevent infinite loop on multiple spaces
-                if (playback.codeIndex >= (int)playback.currentMorseCode.length()) {
-                    Serial.print(") ");
-                    playback.messageIndex++;
-                    playback.state = PlaybackState::CharGap;
-                    playback.stateStartTime = currentTime;
-                    playback.stateDuration = 0;
-                }
-            }
-            else {
-                // Play element
-                Serial.print(element);
-                signalOn();
-                playback.state = PlaybackState::SignalOn;
-                playback.stateStartTime = currentTime;
-                playback.stateDuration = (element == '.') ? DOT_MS : DASH_MS;
-            }
+            playback.stateDuration = (element == '.') ? DOT_MS : DASH_MS;
         }
         break;
 
     case PlaybackState::CharGap:
         // Start next character
-    {
-        // Safety check
-        if (playback.messageIndex >= (int)playback.message.length()) {
-            Serial.println("\n>>> Done.\n");
-            playback.state = PlaybackState::Idle;
-            wsBroadcastPlaybackDone();
-            if (!playback.echoMode) {
-                Serial.print("> ");
-            }
-            break;
-        }
-
-        char c = playback.message[playback.messageIndex];
-        playback.currentMorseCode = getMorseCode(c);
-
-        if (playback.currentMorseCode.length() == 0) {
-            Serial.print("\n[");
-            Serial.print(prosignDisplayName(c));
-            Serial.println(" not in table - skipping]");
-            playback.messageIndex++;
-
+        {
+            // Safety check
             if (playback.messageIndex >= (int)playback.message.length()) {
                 Serial.println("\n>>> Done.\n");
                 playback.state = PlaybackState::Idle;
@@ -328,14 +261,33 @@ void updatePlayback() {
                 if (!playback.echoMode) {
                     Serial.print("> ");
                 }
+                break;
             }
-            break;
-        }
 
-        // Send pattern to phone and wait for ACK before starting buzzer
-        sendCharToPhoneAndWait();
-    }
-    break;
+            char c = playback.message[playback.messageIndex];
+            playback.currentMorseCode = getMorseCode(c);
+
+            if (playback.currentMorseCode.length() == 0) {
+                Serial.print("\n[");
+                Serial.print(prosignDisplayName(c));
+                Serial.println(" not in table - skipping]");
+                playback.messageIndex++;
+
+                if (playback.messageIndex >= (int)playback.message.length()) {
+                    Serial.println("\n>>> Done.\n");
+                    playback.state = PlaybackState::Idle;
+                    wsBroadcastPlaybackDone();
+                    if (!playback.echoMode) {
+                        Serial.print("> ");
+                    }
+                }
+                break;
+            }
+
+            // Send pattern to phone and wait for ACK before starting buzzer
+            sendCharToPhoneAndWait();
+        }
+        break;
 
     case PlaybackState::WordGap:
         // After word gap, start next character

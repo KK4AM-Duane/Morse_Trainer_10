@@ -16,7 +16,6 @@ enum class PlaybackState : uint8_t {
   WaitPhoneReady,  // Sent char pattern to phone, waiting for ACK
   SignalOn,
   ElementGap,      // Gap between dits/dahs
-  InternalCharGap, // Gap within compound codes (like % = 0/0)
   CharGap,
   WordGap
 };
