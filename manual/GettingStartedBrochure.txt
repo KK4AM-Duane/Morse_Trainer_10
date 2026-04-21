@@ -1,0 +1,221 @@
+## ESP32 Morse Code Trainer Quick Start
+
+### 1. Power-Up and Switch Positions
+- **Set the WiFi switch before booting**
+  - **HIGH = AP mode**: the ESP32 creates its own WiFi network.
+  - **LOW = STA mode**: the ESP32 joins your phone hotspot/home WiFi.
+- **Set the operating mode switch**
+  - **HIGH = Trainer**
+  - **LOW = CW Keyer**
+
+> WiFi mode is read at startup, so change it **before powering on or rebooting**.
+
+---
+
+### 2. AP and WiFi Setup
+
+#### Option A: AP Mode
+Use this for the fastest first-time setup.
+
+1. Set WiFi switch to **AP**.
+2. Power on the unit.
+3. Connect your phone/tablet/computer to:
+   - **SSID:** `ESP32_Morse_Trainer`
+   - **Password:** `morse1234`
+4. Open:
+   - `http://192.168.4.1`
+   - or `http://cwtrainer.local`
+
+#### Option B: STA Mode
+Use this when you want the trainer on your existing hotspot/network.
+
+1. Set WiFi switch to **STA**.
+2. Power on the unit.
+3. If no saved WiFi exists, connect to the setup portal:
+   - **SSID:** `CW_Trainer_Setup`
+   - **Password:** `morse1234`
+4. Choose your hotspot/network and save credentials.
+5. After connection, open:
+   - `http://cwtrainer.local`
+   - or the IP shown on the serial monitor
+
+If needed, clear saved STA credentials with:
+```plaintext
+wifi reset
+```
+
+---
+
+### 3. Morse Code Trainer Setup
+Set the mode switch to **Trainer**.
+
+Recommended first steps in the serial console:
+```plaintext
+key straight
+wpm 18
+buzzer on
+koch start
+```
+
+Useful trainer commands:
+```plaintext
+help
+status
+koch start
+koch pause
+koch resume
+koch stop
+koch stat
+koch reset
+echo start
+echo stop
+echo koch
+echo full
+```
+
+#### Basic operation
+- **Koch Trainer**
+  - Start with `koch start`
+  - Listen to the character
+  - Type the answer
+  - Use `koch pause`, `koch resume`, or `koch stop` as needed
+
+- **Echo Trainer**
+  - Start with `echo start`
+  - Send the character on the key/paddle
+  - The unit scores what you sent
+
+#### Common settings
+```plaintext
+key straight
+key iambic
+wpm 20
+buzzer on
+buzzer off
+wifi show
+```
+
+---
+
+### 4. Memory Keyer Setup
+Set the mode switch to **CW Keyer**.
+
+Notes:
+- Memory playback works **only in CW Keyer mode**
+- There are **6 memory slots**: `M1` to `M6`
+- Memory text is saved and restored after reboot
+
+#### Initial use
+1. Connect to the web page.
+2. Open the **Memory Keyer** section.
+3. Enter text into any memory slot.
+4. Save it.
+5. Press **Play** for that slot.
+
+#### Keyer tips
+- Manual keying works in CW Keyer mode.
+- Select your key type first if needed:
+```plaintext
+key straight
+key iambic
+wpm 18
+```
+
+---
+
+### 5. Quick Reference
+- **Trainer mode:** mode switch **HIGH**
+- **CW Keyer mode:** mode switch **LOW**
+- **AP WiFi:** connect to `ESP32_Morse_Trainer`
+- **STA setup portal:** connect to `CW_Trainer_Setup`
+- **Web page:** `http://192.168.4.1` or `http://cwtrainer.local`
+
+If needed, use:
+```plaintext
+help
+status
+wifi show
+keyer
+```
+
+wifi reset
+
+3. Morse Code Trainer Setup
+Set the mode switch to Trainer.
+Recommended first steps in the serial console:
+
+
+key straight
+wpm 18
+buzzer on
+koch start
+
+Useful trainer commands:
+
+
+help
+status
+koch start
+koch pause
+koch resume
+koch stop
+koch stat
+koch reset
+echo start
+echo stop
+echo koch
+echo full
+
+Basic operation
+•	Koch Trainer
+•	Start with koch start
+•	Listen to the character
+•	Type the answer
+•	Use koch pause, koch resume, or koch stop as needed
+•	Echo Trainer
+•	Start with echo start
+•	Send the character on the key/paddle
+•	The unit scores what you sent
+Common settings
+
+
+key straight
+key iambic
+wpm 20
+buzzer on
+buzzer off
+wifi show
+
+4. Memory Keyer Setup
+Set the mode switch to CW Keyer.
+Notes:
+•	Memory playback works only in CW Keyer mode
+•	There are 6 memory slots: M1 to M6
+•	Memory text is saved and restored after reboot
+Initial use
+1.	Connect to the web page.
+2.	Open the Memory Keyer section.
+3.	Enter text into any memory slot.
+4.	Save it.
+5.	Press Play for that slot.
+Keyer tips
+•	Manual keying works in CW Keyer mode.
+•	Select your key type first if needed:
+
+key straight
+key iambic
+wpm 18
+
+---
+5. Quick Reference
+•	Trainer mode: mode switch HIGH
+•	CW Keyer mode: mode switch LOW
+•	AP WiFi: connect to ESP32_Morse_Trainer
+•	STA setup portal: connect to CW_Trainer_Setup
+•	Web page: http://192.168.4.1 or http://cwtrainer.local
+If needed, use:
+
+help
+status
+wifi show
+keyer

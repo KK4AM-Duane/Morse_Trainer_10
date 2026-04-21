@@ -1,0 +1,33 @@
+Session Parameters:
+
+An ESP32-based Morse code training system that runs as a WiFi Access Point with a web interface, serial CLI, and hardware feedback (buzzer + LEDs). It implements the Koch method for progressive CW learning.
+
+Module Breakdown
+
+Module		Responsibility
+config.h	Core data structures (CharStats, TrainerState, MorseTiming) and Koch character order
+
+MorseLookup	Morse code encoding via multiple backends (vector table, PROGMEM tree, PROGMEM direct table) with prosign support
+
+MorsePlayback	Non-blocking state machine for playing Morse via buzzer/LED (SignalOn → ElementGap → CharGap → WordGap) with Farnsworth timing
+
+MorseCommands	Serial CLI — parses commands, handles real-time echo mode, and Koch single-char answer shortcuts (ESC/Ctrl-C to abort)
+KochTrainer	Koch method state machine (Idle → SelectAndPlay → WaitPlayback → WaitResponse → ShowResult), adaptive character selection, NVS persistence for 				lesson/stats/WPM
+
+Storage		NVS (Non-Volatile Storage) wrapper via Preferences for persisting trainer state across reboots
+
+WiFiAP		ESP-IDF AP setup with client monitoring and LED status indication
+
+MorseWebServer	Async web server on LittleFS, REST API (/api/status, /api/koch_stats), static file serving
+
+MorseWebSocket	WebSocket broadcasts for real-time sync — character sent, Koch challenges, results, session events, buzzer state
+
+
+Key Design Patterns
+•	Non-blocking architecture — all state machines are tick-driven from loop(), no blocking delays
+•	Dual interface — serial CLI + phone/browser WebSocket UI with synchronized playback
+•	Farnsworth timing — separate character speed vs. effective speed for learner-friendly pacing
+•	Adaptive training — per-character probability weighting based on accuracy and reaction time
+•	Persistent state — lesson progress, character stats, WPM, and buzzer mute all survive reboots via NVS
+
+I'm up to speed on the project. What would you like to work on?

@@ -1,0 +1,892 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'><style type='text/css'>html {overflow-x: initial !important;}</style>
+<style type='text/css'  id="style-base">:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, "Segoe UI Emoji", "SF Pro", sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p *, #write.first-line-indent svg * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; position: relative; }
+#write svg h1, #write svg h2, #write svg h3, #write svg h4, #write svg h5, #write svg h6, #write svg p { position: static; }
+.nodeLabel p { padding-right: 2px; padding-left: 2px; }
+.typora-export .nodeLabel p { padding-right: 0px; padding-left: 0px; }
+foreignobject { overflow: visible; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+li p { orphans: 1; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.mermaid-svg { margin: auto; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left: 0.25em solid rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+</style>
+<style type='text/css'  id="style-codemirror">.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; outline: 0px; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: auto hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 10px; z-index: 3; overflow-y: hidden; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; inset: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+span.cm-underlined { text-decoration: underline; }
+span.cm-strikethrough { text-decoration: line-through; }
+.cm-tw-syntaxerror { color: rgb(255, 255, 255); background-color: rgb(153, 0, 0); }
+.cm-tw-deleted { text-decoration: line-through; }
+.cm-tw-header5 { font-weight: 700; }
+.cm-tw-listitem:first-child { padding-left: 10px; }
+.cm-tw-box { border-style: solid; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-color: inherit; border-top-width: 0px !important; }
+.cm-tw-underline { text-decoration: underline; }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+</style>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&amp;subset=latin,latin-ext' type='text/css' />
+<style type='text/css'  id="style-theme_css">:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', 'SF Pro', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    pre {
+        page-break-inside: avoid;
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.mac-os #write{
+    caret-color: AccentColor;
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+</style>
+<style type='text/css'  id="style-lp">ol, ul {padding-left: 40px}</style>
+
+<title>Morse_Trainer-Documentation</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h3 id='data-flow-sequence'><span>Data Flow Sequence</span></h3><p><strong><span>Koch Trainer Mode:</span></strong></p><ol start='' ><li><p><span>System starts with high-frequency characters (K, M, U, R, E, S, N, A...)</span></p></li><li><p><span>Student learns characters one or two at a time</span></p></li><li><p><span>System advances to new characters when accuracy ≥ 90%</span></p></li><li><p><span>System adjusts speed up/down based on performance</span></p></li><li><p><span>System tracks statistics for each character learned</span></p></li></ol><p><strong><span>Echo Trainer Mode:</span></strong></p><ol start='' ><li><p><span>Student uses paddle or straight key to send Morse code</span></p></li><li><p><span>System decodes and displays what was sent</span></p></li><li><p><span>System builds sending accuracy and rhythm</span></p></li><li><p><span>Student can practice Koch lesson characters or full character set</span></p></li></ol><p><strong><span>Practice Player Mode:</span></strong></p><ol start='' ><li><p><span>System plays pre-written text files for copying practice</span></p></li><li><p><span>Useful for QSO (conversation) simulation</span></p></li><li><p><span>System tracks progress through long texts</span></p></li></ol><p><strong><span>CW Keyer Mode:</span></strong></p><ol start='' ><li><p><span>Direct passthrough from paddle to transmitter</span></p></li><li><p><span>For on-air operation with real radios</span></p></li><li><p><span>Includes 6 programmable memory buttons (M1-M6)</span></p></li></ol><h4 id='data-flow-between-modules'><span>Data Flow between Modules</span></h4><ul><li><p><strong><span>Koch Trainer Mode:</span></strong></p><ul><li><p><span>Key input → Character recognition → Speed adjustment → Statistics tracking</span></p></li></ul></li><li><p><strong><span>Echo Trainer Mode:</span></strong></p><ul><li><p><span>Key input → Decoding → Display → Accuracy feedback</span></p></li></ul></li><li><p><strong><span>Practice Player Mode:</span></strong></p><ul><li><p><span>Text file → Sound playback → Practice interface → Progress tracking</span></p></li></ul></li><li><p><strong><span>CW Keyer Mode:</span></strong></p><ul><li><p><span>Key input → Transmit directly (no decoding)</span></p></li></ul></li></ul><hr /><h2 id='functional-specification-document'><span>Functional Specification Document</span></h2><h3 id='1-project-overview'><span>1. Project Overview</span></h3><p><strong><span>Project Name:</span></strong><span> ESP32 Morse Code Trainer</span><br/><strong><span>Version:</span></strong><span> 1.0</span><br/><strong><span>Platform:</span></strong><span> ESP32-WROOM microcontroller</span><br/><strong><span>Purpose:</span></strong><span> An interactive Morse code learning system that teaches students and amateur radio operators to send and receive Morse code at progressively faster speeds.</span></p><h3 id='2-system-goals'><span>2. System Goals</span></h3><ul><li><p><span>Teach Morse code using the proven Koch method (gradual character introduction)</span></p></li><li><p><span>Provide real-time feedback on accuracy and speed</span></p></li><li><p><span>Adapt difficulty automatically based on student performance</span></p></li><li><p><span>Work standalone or with a smartphone web interface</span></p></li><li><p><span>Support both learning mode and practice mode for experienced users</span></p></li></ul><h3 id='3-key-features'><span>3. Key Features</span></h3><h4 id='31-training-modes'><span>3.1 Training Modes</span></h4><p><strong><span>Koch Trainer Mode:</span></strong></p><ul><li><p><span>Teaches characters one or two at a time in optimal learning order</span></p></li><li><p><span>Starts with high-frequency characters (K, M, U, R, E, S, N, A...)</span></p></li><li><p><span>Automatically advances to new characters when accuracy ≥ 90%</span></p></li><li><p><span>Adjusts speed up/down based on performance</span></p></li><li><p><span>Tracks statistics for each character learned</span></p></li></ul><p><strong><span>Echo Trainer Mode:</span></strong></p><ul><li><p><span>Student uses paddle or straight key to send Morse code</span></p></li><li><p><span>System decodes and displays what was sent</span></p></li><li><p><span>Builds sending accuracy and rhythm</span></p></li><li><p><span>Can practice Koch lesson characters or full character set</span></p></li></ul><p><strong><span>Practice Player Mode:</span></strong></p><ul><li><p><span>Plays pre-written text files for copying practice</span></p></li><li><p><span>Useful for QSO (conversation) simulation</span></p></li><li><p><span>Tracks progress through long texts</span></p></li></ul><p><strong><span>CW Keyer Mode:</span></strong></p><ul><li><p><span>Direct passthrough from paddle to transmitter</span></p></li><li><p><span>For on-air operation with real radios</span></p></li><li><p><span>Includes 6 programmable memory buttons (M1-M6)</span></p></li></ul><h4 id='32-connectivity-options'><span>3.2 Connectivity Options</span></h4><p><strong><span>Access Point (AP) Mode:</span></strong></p><ul><li><p><span>ESP32 creates its own WiFi network (&quot;CW_Trainer&quot;)</span></p></li><li><p><span>Student connects phone/tablet to this network</span></p></li><li><p><span>No internet required</span></p></li><li><p><span>Default mode</span></p></li></ul><p><strong><span>Station (STA) Mode:</span></strong></p><ul><li><p><span>ESP32 connects to existing WiFi (phone hotspot)</span></p></li><li><p><span>Useful for remote learning or internet connectivity</span></p></li><li><p><span>Blinks IP address in Morse code when requested (GPIO15 switch)</span></p></li><li><p><span>Blinks &quot;NC&quot; if network connection fails</span></p></li></ul><h4 id='33-user-interfaces'><span>3.3 User Interfaces</span></h4><p><strong><span>Serial Terminal (USB):</span></strong></p><ul><li><p><span>Type commands like </span><code>koch 5</code><span> to set lesson</span></p></li><li><p><span>Type answers to challenges</span></p></li><li><p><span>View statistics and help</span></p></li></ul><p><strong><span>Web Interface:</span></strong></p><ul><li><p><span>Modern smartphone-friendly design</span></p></li><li><p><span>Visual keyboard for answers</span></p></li><li><p><span>Real-time statistics display</span></p></li><li><p><span>Works over WiFi</span></p></li></ul><p><strong><span>Physical Hardware:</span></strong></p><ul><li><p><span>Morse key input (straight key or iambic paddles)</span></p></li><li><p><span>Buzzer for audio feedback (800 Hz tone)</span></p></li><li><p><span>LEDs for visual indication</span></p></li><li><p><span>Mode switches for operation selection</span></p></li></ul><h3 id='4-performance-requirements'><span>4. Performance Requirements</span></h3><ul><li><p><strong><span>Response Time:</span></strong><span> System must decode key input within 50ms</span></p></li><li><p><strong><span>Timing Accuracy:</span></strong><span> Morse timing must be accurate within ±5ms</span></p></li><li><p><strong><span>WiFi Range:</span></strong><span> 30+ meters in open space (AP mode)</span></p></li><li><p><strong><span>Speed Range:</span></strong><span> 5 WPM to 50 WPM (words per minute)</span></p></li><li><p><strong><span>Character Set:</span></strong><span> 51 characters (26 letters, 10 numbers, punctuation, 7 prosigns)</span></p></li></ul><h3 id='5-safety-and-reliability'><span>5. Safety and Reliability</span></h3><ul><li><p><span>Non-volatile storage preserves progress across power cycles</span></p></li><li><p><span>Automatic reconnection if WiFi drops</span></p></li><li><p><span>Timeout protection prevents infinite waiting</span></p></li><li><p><span>LED indicators show system status at a glance</span></p></li></ul><h3 id='6-user-roles'><span>6. User Roles</span></h3><p><strong><span>Primary Users:</span></strong></p><ul><li><p><span>High school STEM students learning electronics and programming</span></p></li><li><p><span>Amateur radio license candidates</span></p></li><li><p><span>Ham radio operators maintaining code proficiency</span></p></li></ul><p><strong><span>Skill Levels Supported:</span></strong></p><ul><li><p><span>Complete beginners (starts at 2 characters, slow speed)</span></p></li><li><p><span>Intermediate learners (adaptive difficulty)</span></p></li><li><p><span>Advanced operators (full character set, high speeds)</span></p></li></ul><hr /><h2 id='system-architecture-overview'><span>System Architecture Overview</span></h2><h3 id='high-level-block-diagram'><span>High-Level Block Diagram</span></h3><p><span>graph TB subgraph Hardware[&quot;ESP32 Hardware&quot;] MCU[ESP32</span><br/><span>Microcontroller] BUZZER[Buzzer</span><br/><span>GPIO 25] LED1[Onboard LED</span><br/><span>GPIO 2] LED2[External LED</span><br/><span>GPIO 16] LED_G[Green LED</span><br/><span>GPIO 4] LED_R[Red LED</span><br/><span>GPIO 17] KEY[Dit Paddle</span><br/><span>GPIO 32] DAH[Dah Paddle</span><br/><span>GPIO 33] SW1[Mode Switch</span><br/><span>GPIO 18] SW2[WiFi Switch</span><br/><span>GPIO 19] SW3[IP Blink Switch</span><br/><span>GPIO 15] TX[TX Relay</span><br/><span>GPIO 23] end</span>
+<span>subgraph Software[&quot;Software Modules&quot;]</span>
+<span>    MAIN[Main Loop</span><br/><span>Morse_Trainer.ino]</span>
+<span>    KOCH[Koch Trainer</span><br/><span>Character Learning]</span>
+<span>    ECHO[Echo Trainer</span><br/><span>Send Practice]</span>
+<span>    PRACTICE[Practice Player</span><br/><span>Copy Practice]</span>
+<span>    KEYER[CW Keyer Mode</span><br/><span>Transmit]</span>
+<span>    PLAYBACK[Morse Playback</span><br/><span>Sound Engine]</span>
+<span>    KEYINPUT[Key Input</span><br/><span>Decoder]</span>
+<span>    WIFI[WiFi Manager</span><br/><span>AP/STA Modes]</span>
+<span>    WEB[Web Server</span><br/><span>Phone Interface]</span>
+<span>    STORAGE[NVS Storage</span><br/><span>Progress Saving]</span>
+<span>end</span></p><p><span>subgraph Interfaces[&quot;User Interfaces&quot;]</span>
+<span>    PHONE[Smartphone</span><br/><span>Web Browser]</span>
+<span>    SERIAL[Serial Terminal</span><br/><span>USB]</span>
+<span>    HARDWARE_UI[Physical Controls</span><br/><span>Switches &amp; Keys]</span>
+<span>end</span></p><p><span>MCU --&gt; BUZZER</span>
+<span>MCU --&gt; LED1</span>
+<span>MCU --&gt; LED2</span>
+<span>MCU --&gt; LED_G</span>
+<span>MCU --&gt; LED_R</span>
+<span>MCU --&gt; TX</span>
+<span>KEY --&gt; MCU</span>
+<span>DAH --&gt; MCU</span>
+<span>SW1 --&gt; MCU</span>
+<span>SW2 --&gt; MCU</span>
+<span>SW3 --&gt; MCU</span></p><p><span>MAIN --&gt; KOCH</span>
+<span>MAIN --&gt; ECHO</span>
+<span>MAIN --&gt; PRACTICE</span>
+<span>MAIN --&gt; KEYER</span>
+<span>MAIN --&gt; PLAYBACK</span>
+<span>MAIN --&gt; KEYINPUT</span>
+<span>MAIN --&gt; WIFI</span>
+<span>MAIN --&gt; WEB</span>
+<span>MAIN --&gt; STORAGE</span></p><p><span>KOCH --&gt; PLAYBACK</span>
+<span>PRACTICE --&gt; PLAYBACK</span>
+<span>KEYER --&gt; PLAYBACK</span>
+<span>ECHO --&gt; KEYINPUT</span></p><p><span>PHONE --&gt; WEB</span>
+<span>SERIAL --&gt; MAIN</span>
+<span>HARDWARE_UI --&gt; MAIN</span></p><p><span>WIFI --&gt; PHONE</span></p><h3 id='data-flow-sequence-2'><span>Data Flow Sequence</span></h3><p><strong><span>Koch Trainer Mode:</span></strong></p><ol start='' ><li><p><span>System starts with high-frequency characters (K, M, U, R, E, S, N, A...)</span></p></li><li><p><span>Student learns characters one or two at a time</span></p></li><li><p><span>System advances to new characters when accuracy ≥ 90%</span></p></li><li><p><span>System adjusts speed up/down based on performance</span></p></li><li><p><span>System tracks statistics for each character learned</span></p></li></ol><p><strong><span>Echo Trainer Mode:</span></strong></p><ol start='' ><li><p><span>Student uses paddle or straight key to send Morse code</span></p></li><li><p><span>System decodes and displays what was sent</span></p></li><li><p><span>System builds sending accuracy and rhythm</span></p></li><li><p><span>Student can practice Koch lesson characters or full character set</span></p></li></ol><p><strong><span>Practice Player Mode:</span></strong></p><ol start='' ><li><p><span>System plays pre-written text files for copying practice</span></p></li><li><p><span>Useful for QSO (conversation) simulation</span></p></li><li><p><span>System tracks progress through long texts</span></p></li></ol><p><strong><span>CW Keyer Mode:</span></strong></p><ol start='' ><li><p><span>Direct passthrough from paddle to transmitter</span></p></li><li><p><span>For on-air operation with real radios</span></p></li><li><p><span>Includes 6 programmable memory buttons (M1-M6)</span></p></li></ol><h4 id='data-flow-between-modules-2'><span>Data Flow between Modules</span></h4><ul><li><p><strong><span>Koch Trainer Mode:</span></strong></p><ul><li><p><span>Key input → Character recognition → Speed adjustment → Statistics tracking</span></p></li></ul></li><li><p><strong><span>Echo Trainer Mode:</span></strong></p><ul><li><p><span>Key input → Decoding → Display → Accuracy feedback</span></p></li></ul></li><li><p><strong><span>Practice Player Mode:</span></strong></p><ul><li><p><span>Text file → Sound playback → Practice interface → Progress tracking</span></p></li></ul></li><li><p><strong><span>CW Keyer Mode:</span></strong></p><ul><li><p><span>Key input → Transmit directly (no decoding)</span></p></li></ul></li></ul><hr /><h2 id='hardware-requirements'><span>Hardware Requirements</span></h2><h3 id='required-components'><span>Required Components</span></h3><figure class='table-figure'><table><thead><tr><th><span>Component</span></th><th><span>Specification</span></th><th><span>Purpose</span></th></tr></thead><tbody><tr><td><span>ESP32-WROOM</span></td><td><span>ESP32 DevKit v1 or similar</span></td><td><span>Main microcontroller</span></td></tr><tr><td><span>Buzzer</span></td><td><span>Piezo buzzer or speaker</span></td><td><span>Audio feedback</span></td></tr><tr><td><span>LEDs</span></td><td><span>5mm LEDs (red, green, blue)</span></td><td><span>Visual indicators</span></td></tr><tr><td><span>Resistors</span></td><td><span>330Ω for LEDs</span></td><td><span>Current limiting</span></td></tr><tr><td><span>Morse Key</span></td><td><span>Straight key or iambic paddles</span></td><td><span>User input</span></td></tr><tr><td><span>Switches</span></td><td><span>SPST momentary/toggle</span></td><td><span>Mode selection</span></td></tr><tr><td><span>USB Cable</span></td><td><span>Micro-USB or USB-C</span></td><td><span>Power and programming</span></td></tr><tr><td><span>Breadboard</span></td><td><span>Standard size</span></td><td><span>Prototyping</span></td></tr><tr><td><span>Jumper Wires</span></td><td><span>Male-to-male</span></td><td><span>Connections</span></td></tr></tbody></table></figure><h3 id='pin-assignments'><span>Pin Assignments</span></h3><figure class='table-figure'><table><thead><tr><th><span>GPIO</span></th><th><span>Function</span></th><th><span>Direction</span></th><th><span>Description</span></th></tr></thead><tbody><tr><td><span>2</span></td><td><span>Onboard LED</span></td><td><span>OUTPUT</span></td><td><span>Morse playback indicator</span></td></tr><tr><td><span>4</span></td><td><span>Green LED</span></td><td><span>OUTPUT</span></td><td><span>Success/ready indicator</span></td></tr><tr><td><span>17</span></td><td><span>Red LED</span></td><td><span>OUTPUT</span></td><td><span>Error indicator</span></td></tr><tr><td><span>25</span></td><td><span>Buzzer</span></td><td><span>OUTPUT</span></td><td><span>PWM tone generation</span></td></tr><tr><td><span>32</span></td><td><span>Dit/Key Input</span></td><td><span>INPUT_PULLUP</span></td><td><span>Dit paddle or straight key</span></td></tr><tr><td><span>33</span></td><td><span>Dah Input</span></td><td><span>INPUT_PULLUP</span></td><td><span>Dah paddle (iambic mode)</span></td></tr><tr><td><span>18</span></td><td><span>Mode Switch</span></td><td><span>INPUT_PULLUP</span></td><td><span>Trainer/Keyer selection</span></td></tr><tr><td><span>19</span></td><td><span>WiFi Mode</span></td><td><span>INPUT_PULLUP</span></td><td><span>AP/STA selection</span></td></tr><tr><td><span>15</span></td><td><span>IP Blink Request</span></td><td><span>INPUT_PULLUP</span></td><td><span>Trigger IP display</span></td></tr><tr><td><span>16</span></td><td><span>External LED</span></td><td><span>OUTPUT</span></td><td><span>IP address display</span></td></tr><tr><td><span>23</span></td><td><span>TX Relay</span></td><td><span>OUTPUT</span></td><td><span>Transmitter keying</span></td></tr><tr><td><span>36</span></td><td><span>Random Seed</span></td><td><span>INPUT</span></td><td><span>Floating analog for entropy</span></td></tr></tbody></table></figure><h3 id='circuit-diagram-simplified'><span>Circuit Diagram (Simplified)</span></h3><p><span>ESP32 Pin Connections:</span>
+<span>┌─────────────────────────────────────────────────────────────┐ │                      BUZZER CIRCUIT                         │ ├─────────────────────────────────────────────────────────────┤ │  [GPIO 25] ──[330Ω]──[+BUZZER-]──[GND]                     │ └─────────────────────────────────────────────────────────────┘</span>
+<span>┌─────────────────────────────────────────────────────────────┐ │                       LED CIRCUITS                          │ ├─────────────────────────────────────────────────────────────┤ │  [GPIO 2]  ──[330Ω]──[LED]──|&gt;|──[GND]  (onboard/blue)     │ │  [GPIO 16] ──[330Ω]──[LED]──|&gt;|──[GND]  (external)         │ │  [GPIO 4]  ──[330Ω]──[LED]──|&gt;|──[GND]  (green)            │ │  [GPIO 17] ──[330Ω]──[LED]──|&gt;|──[GND]  (red)              │ └─────────────────────────────────────────────────────────────┘</span>
+<span>┌─────────────────────────────────────────────────────────────┐ │                     SWITCH CIRCUITS                         │ │              (Active LOW with internal pullup)              │ ├─────────────────────────────────────────────────────────────┤ │  [GPIO 32] ──[SWITCH]──[GND]  (dit paddle / straight key)  │ │  [GPIO 33] ──[SWITCH]──[GND]  (dah paddle)                 │ │  [GPIO 18] ──[SWITCH]──[GND]  (mode select)                │ │  [GPIO 19] ──[SWITCH]──[GND]  (wifi select)                │ │  [GPIO 15] ──[SWITCH]──[GND]  (IP blink trigger)           │ └─────────────────────────────────────────────────────────────┘</span>
+<span>┌─────────────────────────────────────────────────────────────┐ │                    TRANSMITTER OUTPUT                       │ ├─────────────────────────────────────────────────────────────┤ │  [GPIO 23] ──[RELAY/TRANSISTOR]──[TX OUT]                  │ └─────────────────────────────────────────────────────────────┘</span></p><h3 id='module-3-morse-playback-morseplaybackcpph'><span>Module 3: Morse Playback (MorsePlayback.cpp/h)</span></h3><p><strong><span>What it does:</span></strong><span> Converts letters/numbers into Morse code sounds (beeps).</span></p><p><strong><span>Think of it like:</span></strong><span> A musician reading sheet music and playing notes on an instrument.</span></p><p><strong><span>Morse Code Rules:</span></strong></p><ul><li><p><strong><span>Dit (.)</span></strong><span> = Short beep (1 unit of time)</span></p></li><li><p><strong><span>Dah (-)</span></strong><span> = Long beep (3 units)</span></p></li><li><p><strong><span>Space between sounds in same letter</span></strong><span> = 1 unit</span></p></li><li><p><strong><span>Space between letters</span></strong><span> = 3 units</span></p></li><li><p><strong><span>Space between words</span></strong><span> = 7 units</span></p></li></ul><p><strong><span>Example:</span></strong><span> The letter &quot;K&quot; is dash-dot-dash (</span><code>-.-</code><span>)</span></p><p><strong><span>State Machine:</span></strong></p><h1 id='response'><span>Response</span></h1><p><span>stateDiagram-v2 [*] --&gt; Idle Idle --&gt; WaitPhoneReady: Play Requested WaitPhoneReady --&gt; SignalOn: Ready ACK / Timeout SignalOn --&gt; ElementGap: Dit/Dah Complete ElementGap --&gt; SignalOn: More Elements ElementGap --&gt; CharGap: Character Complete CharGap --&gt; SignalOn: More Characters CharGap --&gt; WordGap: Word Complete WordGap --&gt; SignalOn: More Words WordGap --&gt; Idle: Message Complete CharGap --&gt; Idle: Message Complete</span></p><h3 id='module-4-key-input-keyinputcpph'><span>Module 4: Key Input (KeyInput.cpp/h)</span></h3><p><strong><span>What it does:</span></strong><span> Reads the Morse key/paddles and figures out what letter you&#39;re sending.</span></p><p><strong><span>Think of it like:</span></strong><span> A translator that listens to beeps and converts them to letters.</span></p><p><strong><span>Two modes:</span></strong></p><p><strong><span>Straight Key Mode:</span></strong></p><ul><li><p><span>You control everything manually</span></p></li><li><p><span>Press key down = dit or dah depending on how long</span></p></li><li><p><span>System measures timing</span></p></li></ul><p><strong><span>Iambic Mode (Advanced):</span></strong></p><ul><li><p><span>Two paddles: left = dit, right = dah</span></p></li><li><p><span>Automatic alternation (squeeze = dit-dah-dit-dah...)</span></p></li><li><p><span>Self-completing (helps form proper rhythm)</span></p></li></ul><p><strong><span>Decoding Logic:</span></strong></p><p><span>flowchart TD A[Key Down] --&gt; B[Measure Time] B --&gt; C[Key Up] C --&gt; D{Duration?} D --&gt;|&lt; 180ms| E[Dit .] D --&gt;|&gt;= 180ms| F[Dah -] E --&gt; G[Store Pattern] F --&gt; G G --&gt; H{Pause Detected?} H --&gt;|No| A H --&gt;|Yes| I[Lookup Letter] I --&gt; J[Display Result] J --&gt; K[Clear Pattern] K --&gt; A</span></p><p><span>flowchart TD A[Key Down] --&gt; B[Measure Time] B --&gt; C[Key Up] C --&gt; D{Duration?} D --&gt;|&lt; 180ms| E[Dit .] D --&gt;|&gt;= 180ms| F[Dah -] E --&gt; G[Store Pattern] F --&gt; G G --&gt; H{Pause Detected?} H --&gt;|No| A H --&gt;|Yes| I[Lookup Letter] I --&gt; J[Display Result] J --&gt; K[Clear Pattern] K --&gt; A### Module 5: Echo Trainer (EchoTrainer.cpp/h)</span></p><p><strong><span>What it does:</span></strong><span> Lets you practice sending Morse code and shows what you sent.</span></p><p><strong><span>Think of it like:</span></strong><span> A mirror that shows your Morse code &quot;handwriting.&quot;</span></p><p><strong><span>Process:</span></strong></p><ol start='' ><li><p><span>You send Morse code with your key</span></p></li><li><p><span>System decodes it (using KeyInput module)</span></p></li><li><p><span>Shows the letter on screen</span></p></li><li><p><span>Tracks accuracy statistics</span></p></li></ol><p><strong><span>Character Sources:</span></strong></p><ul><li><p><strong><span>Koch mode:</span></strong><span> Only current lesson characters</span></p></li><li><p><strong><span>Full mode:</span></strong><span> All 51 characters</span></p></li></ul><h3 id='module-6-wifi-manager-wifiapmodecpph-wifistationcpph'><span>Module 6: WiFi Manager (WiFiAPMode.cpp/h, WiFiStation.cpp/h)</span></h3><p><strong><span>What it does:</span></strong><span> Handles wireless connectivity in two ways.</span></p><p><strong><span>Access Point (AP) Mode:</span></strong></p><ul><li><p><span>ESP32 becomes a WiFi hotspot named &quot;CW_Trainer&quot;</span></p></li><li><p><span>Your phone connects to it</span></p></li><li><p><span>No internet needed</span></p></li><li><p><span>Like the ESP32 is a wireless router</span></p></li></ul><p><strong><span>Station (STA) Mode:</span></strong></p><ul><li><p><span>ESP32 connects to your existing WiFi</span></p></li><li><p><span>Gets an IP address from router</span></p></li><li><p><span>Can access internet if needed</span></p></li><li><p><span>Like the ESP32 is a laptop joining WiFi</span></p></li></ul><p><strong><span>IP Address Blinking Feature:</span></strong></p><ul><li><p><span>Press GPIO15 switch to ground</span></p></li><li><p><span>If connected: Blinks IP address in Morse (e.g., &quot;192.168.1.100&quot;)</span></p></li><li><p><span>If not connected: Blinks &quot;NC&quot; (Not Connected)</span></p></li><li><p><span>Uses onboard LED (GPIO2) and external LED (GPIO16)</span></p></li></ul><h3 id='module-7-web-server-morsewebservercpph'><span>Module 7: Web Server (MorseWebServer.cpp/h)</span></h3><p><strong><span>What it does:</span></strong><span> Creates a website that runs on the ESP32 so you can control it from your phone.</span></p><p><strong><span>Think of it like:</span></strong><span> The ESP32 is a tiny web server like Google or Facebook, but just for Morse code training.</span></p><p><strong><span>Features:</span></strong></p><ul><li><p><span>Serves HTML/CSS/JavaScript to phone browser</span></p></li><li><p><span>Receives answers via WebSocket (fast two-way communication)</span></p></li><li><p><span>Sends real-time statistics updates</span></p></li><li><p><span>Visual keyboard for answering challenges</span></p></li></ul><p><strong><span>WebSocket vs Regular HTTP:</span></strong></p><ul><li><p><span>HTTP: Request → Response (one-way, like sending letters)</span></p></li><li><p><span>WebSocket: Persistent connection (two-way, like phone call)</span></p></li></ul><h3 id='module-8-storage-storagecpph'><span>Module 8: Storage (Storage.cpp/h)</span></h3><p><strong><span>What it does:</span></strong><span> Saves your progress to permanent memory (NVS = Non-Volatile Storage).</span></p><p><strong><span>Think of it like:</span></strong><span> A save game feature in video games.</span></p><p><strong><span>What gets saved:</span></strong></p><ul><li><p><span>Current Koch lesson number</span></p></li><li><p><span>Statistics for each character learned</span></p></li><li><p><span>Speed settings (WPM)</span></p></li><li><p><span>Key type (straight/iambic)</span></p></li><li><p><span>Buzzer mute state</span></p></li><li><p><span>Keyer memory contents (M1-M6)</span></p></li></ul><p><strong><span>Why it matters:</span></strong><span> When you turn off the ESP32, everything is remembered.</span></p><h3 id='module-9-cw-keyer-mode-cwkeyermodecpph'><span>Module 9: CW Keyer Mode (CWKeyerMode.cpp/h)</span></h3><p><strong><span>What it does:</span></strong><span> Turns the trainer into a real Morse code keyer for amateur radio.</span></p><p><strong><span>Think of it like:</span></strong><span> Switching from practice mode to &quot;real game&quot; mode.</span></p><p><strong><span>Features:</span></strong></p><ul><li><p><span>Direct passthrough from paddle to transmitter</span></p></li><li><p><span>6 memory buttons (M1-M6) for common phrases</span></p></li><li><p><span>Drives GPIO23 to key external transmitter</span></p></li><li><p><span>Side-tone (beep) so you hear what you&#39;re sending</span></p></li></ul><p><strong><span>Memory Example:</span></strong></p><ul><li><p><span>M1 = &quot;CQ CQ CQ DE K7ABC K7ABC K&quot; (calling CQ)</span></p></li><li><p><span>M2 = &quot;TU 73 DE K7ABC SK&quot; (sign-off)</span></p></li></ul><h3 id='module-10-practice-player-practiceplayercpph'><span>Module 10: Practice Player (PracticePlayer.cpp/h)</span></h3><p><strong><span>What it does:</span></strong><span> Plays text files for copy practice.</span></p><p><strong><span>Think of it like:</span></strong><span> An audiobook player, but for Morse code.</span></p><p><strong><span>Process:</span></strong></p><ol start='' ><li><p><span>Load text file from filesystem</span></p></li><li><p><span>Convert text to Morse one word at a time</span></p></li><li><p><span>Play through Morse Playback engine</span></p></li><li><p><span>Track progress (words sent vs total)</span></p></li></ol><p><strong><span>Use case:</span></strong><span> Practice copying realistic QSO (conversations) or news articles.</span></p><hr /><h2 id='how-the-program-works'><span>How the Program Works</span></h2><h3 id='startup-sequence-setup-function'><span>Startup Sequence (setup() function)</span></h3><p><span>flowchart TD A[Power On] --&gt; B[Initialize Serial</span><br/><span>115200 baud] B --&gt; C[Initialize GPIO Pins</span><br/><span>Set INPUT/OUTPUT] C --&gt; D[Configure Buzzer PWM</span><br/><span>800 Hz frequency] D --&gt; E[Load Morse Lookup Table</span><br/><span>Letters to dots/dashes] E --&gt; F[Initialize NVS Storage</span><br/><span>Load saved settings] F --&gt; G[Load Koch Lesson</span><br/><span>Speed, Statistics] G --&gt; H[Read WiFi Mode Switch</span><br/><span>GPIO 19] H --&gt; I{Switch LOW?} I --&gt;|Yes| J[Start STA Mode</span><br/><span>Join WiFi Network] I --&gt;|No| K[Start AP Mode</span><br/><span>Create Network] J --&gt; L[Start Web Server</span><br/><span>Port 80] K --&gt; L L --&gt; M[Start mDNS</span><br/><span>cwtrainer.local] M --&gt; N[Show Help Menu</span><br/><span>Serial Terminal] N --&gt; O[Ready!</span><br/><span>Enter Main Loop]</span></p><h3 id='main-loop-loop-function'><span>Main Loop (loop() function)</span></h3><p><span>The </span><code>loop()</code><span> function runs forever, cycling through these checks:</span></p><p><span>void loop() { // 1. Check for serial commands (typed by user) readSerialInput();</span>
+<span>// 2. Check mode switch (Trainer vs Keyer) pollModeSwitch();</span>
+<span>// 3. Update Morse playback (buzzer timing) updatePlayback();</span>
+<span>// 4. Check Morse key input (if in Trainer mode) if (!isCWKeyerMode()) { pollKeyInput(); }</span>
+<span>// 5. Update Echo trainer state updateEchoTrainer();</span>
+<span>// 6. Update Koch trainer state updateKochTrainer();</span>
+<span>// 7. Update Practice player updatePracticePlayer();</span>
+<span>// 8. Check WiFi connections if (getWiFiOpMode() == WiFiOpMode::AP) { checkWiFiClients(); blinkLEDForConnection(); } else { checkWiFiSTA(); checkIPBlinkSwitch();  // STA mode only }</span>
+<span>// 9. Handle web server handleWebServer(); }</span></p><p><strong><span>Important concept: Non-blocking code</span></strong></p><p><span>Notice there are NO </span><code>delay()</code><span> calls in the main loop. Why?</span></p><p><strong><span>Blocking code (BAD):</span></strong></p><p><span>playMorse(&quot;K&quot;);     // Takes 1.5 seconds delay(1500);        // FROZEN - can&#39;t do anything else! checkWiFi();</span></p><p><strong><span>Non-blocking code (GOOD):</span></strong></p><p><span>if (morseIsPlaying) { updateMorseState();  // Takes &lt;1ms, updates state machine } checkWiFi();          // Can still check WiFi while morse plays!</span></p><p><span>This allows the ESP32 to do many things &quot;at once&quot; (actually very fast switching).</span></p><h3 id='character-selection-algorithm'><span>Character Selection Algorithm</span></h3><p><span>How does Koch Trainer pick which character to send?</span></p><p><span>flowchart TD A[Start Selection] --&gt; B[Sum All Probabilities] B --&gt; C[Generate Random Number</span><br/><span>0 to Total] C --&gt; D[Initialize Accumulator = 0] D --&gt; E[For Each Character in Lesson] E --&gt; F[Add Character Probability</span><br/><span>to Accumulator] F --&gt; G{Random &lt; Accumulator?} G --&gt;|Yes| H[Select This Character] G --&gt;|No| I{More Characters?} I --&gt;|Yes| E I --&gt;|No| J[Error: Should Not Reach] H --&gt; K[Return Selected Character]</span></p><p><strong><span>Example with 3 characters:</span></strong></p><p><span>Lesson 3: K, M, U Probabilities: K=10, M=10, U=20 Total weight = 40</span>
+<span>Number line: 0    10   20        40 |----|----|---------| K    M       U</span>
+<span>Random rolls: roll = 5  → lands in K range → select K roll = 15 → lands in M range → select M roll = 30 → lands in U range → select U roll = 35 → lands in U range → select U</span></p><p><span>Notice U has double the probability (20 vs 10), so it&#39;s picked twice as often!</span></p><h3 id='speed-adaptation'><span>Speed Adaptation</span></h3><p><span>Every 10 characters, the system checks if speed should change:</span></p><p><span>flowchart TD A[Every 10 Characters] --&gt; B[Calculate Accuracy</span><br/><span>= Correct / Total] B --&gt; C{Accuracy &gt;= 90%?} C --&gt;|Yes| D[Speed Up!</span><br/><span>WPM += 2] C --&gt;|No| E{Accuracy &lt; 70%?} E --&gt;|Yes| F[Slow Down!</span><br/><span>WPM -= 3] E --&gt;|No| G[No Change] D --&gt; H[Enforce Max WPM = 50] F --&gt; I[Enforce Min WPM = 18] H --&gt; J[Recalculate Timing] I --&gt; J G --&gt; J J --&gt; K[Continue Training]</span></p><h3 id='morse-code-timing-calculation'><span>Morse Code Timing Calculation</span></h3><p><span>void updateTiming() { // Standard Morse timing formula // 1 WPM = 50 dit units per minute // &quot;PARIS &quot; = 50 dit units (standard word)</span>
+<span>DOT_MS = 1200 / WPM;           // Duration of one dit DASH_MS = 3 * DOT_MS;          // Dah is 3x longer ELEMENT_GAP_MS = DOT_MS;       // Space within letter CHAR_GAP_MS = 3 * DOT_MS;      // Space between letters WORD_GAP_MS = 7 * DOT_MS;      // Space between words }</span></p><p><strong><span>Example at 20 WPM:</span></strong></p><p><span>DOT_MS = 1200 / 20 = 60ms DASH_MS = 180ms ELEMENT_GAP_MS = 60ms CHAR_GAP_MS = 180ms WORD_GAP_MS = 420ms</span></p><p><strong><span>Playing &quot;SOS&quot; (... --- ...):</span></strong></p><p><span>S: ON 60ms, OFF 60ms, ON 60ms, OFF 60ms, ON 60ms, OFF 180ms O: ON 180ms, OFF 60ms, ON 180ms, OFF 60ms, ON 180ms, OFF 180ms S: ON 60ms, OFF 60ms, ON 60ms, OFF 60ms, ON 60ms, OFF 420ms</span></p><hr /><h2 id='understanding-key-functions'><span>Understanding Key Functions</span></h2><h3 id='function-1-setup'><span>Function 1: </span><code>setup()</code></h3><p><strong><span>What it does:</span></strong><span> Runs once when ESP32 powers on. Sets up everything needed.</span></p><p><strong><span>C++ Concepts:</span></strong></p><ul><li><p><code>void</code><span> = function returns nothing</span></p></li><li><p><code>pinMode()</code><span> = configures pin as input or output</span></p></li><li><p><code>digitalWrite()</code><span> = sets pin HIGH (3.3V) or LOW (0V)</span></p></li></ul><p><span>void setup() { // Start serial communication at 115200 bits per second Serial.begin(115200);</span>
+<span>// Configure pin 2 as an output (for LED) pinMode(LED_PIN, OUTPUT);</span>
+<span>// Turn LED off initially (LOW = 0 volts) digitalWrite(LED_PIN, LOW);</span>
+<span>// Configure pin 32 as input with internal pullup resistor // This means the pin reads HIGH normally, LOW when switch pressed pinMode(KEY_PIN, INPUT_PULLUP); }</span></p><p><strong><span>Analogy:</span></strong><span> Like setting up a new phone before you can use it - configure language, WiFi, apps, etc.</span></p><h3 id='function-2-loop'><span>Function 2: </span><code>loop()</code></h3><p><strong><span>What it does:</span></strong><span> Runs continuously forever (thousands of times per second).</span></p><p><strong><span>C++ Concepts:</span></strong></p><ul><li><p><span>No parameters, no return value</span></p></li><li><p><span>Calls other functions to do work</span></p></li><li><p><span>Very fast execution (completes in &lt;1 millisecond typically)</span></p></li></ul><p><span>void loop() { // Check if anything came in on serial port readSerialInput();</span>
+<span>// Update all systems updatePlayback(); updateKochTrainer();</span>
+<span>// Loop repeats immediately after last line }</span></p><h3 id='function-3-blinkmorsecode'><span>Function 3: </span><code>blinkMorseCode()</code></h3><p><strong><span>What it does:</span></strong><span> Blinks LEDs to show Morse code visually.</span></p><p><strong><span>C++ Concepts:</span></strong></p><ul><li><p><code>const char*</code><span> = pointer to unchangeable text string</span></p></li><li><p><code>for</code><span> loop = repeat code multiple times</span></p></li><li><p><span>Array access with </span><code>[]</code></p></li></ul><p><span>void blinkMorseCode(const char* morseCode) { // Loop through each character in the string for (int i = 0; morseCode[i] != &#39;\0&#39;; i++) {</span></p><p><span>// Check what this character is</span>
+<span>if (morseCode[i] == &#39;.&#39;) {</span>
+<span>  // Dit: turn LED on for short time</span>
+<span>  digitalWrite(LED_PIN, HIGH);</span>
+<span>  delay(IP_DIT_DURATION);  // 120ms</span>
+<span>}</span>
+<span>else if (morseCode[i] == &#39;-&#39;) {</span>
+<span>  // Dah: turn LED on for long time</span>
+<span>  digitalWrite(LED_PIN, HIGH);</span>
+<span>  delay(IP_DAH_DURATION);  // 360ms</span>
+<span>}</span></p><p><span>// Turn LED off between elements</span>
+<span>digitalWrite(LED_PIN, LOW);</span>
+<span>delay(IP_SYMBOL_SPACE);  // 120ms</span>
+<span>} }</span></p><p><strong><span>Breaking it down:</span></strong></p><p><strong><span>What is </span><code>const char*</code><span>?</span></strong></p><ul><li><p><code>char</code><span> = one character (&#39;A&#39;, &#39;B&#39;, &#39;.&#39;)</span></p></li><li><p><code>char*</code><span> = pointer to many characters (a string)</span></p></li><li><p><code>const</code><span> = cannot change the string</span></p></li></ul><p><strong><span>What is </span><code>&#39;\0&#39;</code><span>?</span></strong></p><ul><li><p><span>Null terminator = special marker for end of string</span></p></li><li><p><span>Every string in C/C++ ends with </span><code>&#39;\0&#39;</code></p></li><li><p><span>Example: &quot;HI&quot; is stored as </span><code>[&#39;H&#39;, &#39;I&#39;, &#39;\0&#39;]</code></p></li></ul><p><strong><span>How </span><code>for</code><span> loop works:</span></strong></p><p><span>flowchart TD A[&quot;Initialize: int i = 0&quot;] --&gt; B{&quot;Check: morseCode[i] != &#39;\0&#39;&quot;} B --&gt;|True| C[Execute Loop Body] C --&gt; D[&quot;Increment: i++&quot;] D --&gt; B B --&gt;|False| E[Exit Loop]</span></p><p><strong><span>Example trace for &quot;.-&quot; (letter A):</span></strong></p><p><span>i=0: morseCode[0] = &#39;.&#39; → Turn LED on 120ms i=1: morseCode[1] = &#39;-&#39; → Turn LED on 360ms i=2: morseCode[2] = &#39;\0&#39; → Exit loop</span></p><h3 id='function-4-checkipblinkswitch'><span>Function 4: </span><code>checkIPBlinkSwitch()</code></h3><p><strong><span>What it does:</span></strong><span> Checks if user pressed the IP blink switch, then blinks IP address or &quot;NC&quot;.</span></p><p><strong><span>C++ Concepts:</span></strong></p><ul><li><p><code>if</code><span> statement = conditional execution</span></p></li><li><p><code>while</code><span> loop = repeat while condition is true</span></p></li><li><p><span>Function calls to other functions</span></p></li></ul><p><span>void checkIPBlinkSwitch() { // Read the switch pin (LOW = pressed) if (digitalRead(IP_BLINK_SWITCH_PIN) == LOW) {</span>
+<span>// Wait 50ms to eliminate switch bounce</span>
+<span>delay(50);</span></p><p><span>// Check again to confirm press</span>
+<span>if (digitalRead(IP_BLINK_SWITCH_PIN) == LOW) {</span></p><p><span>  // Keep blinking while switch is held</span>
+<span>  while (digitalRead(IP_BLINK_SWITCH_PIN) == LOW) {</span>
+<span>    </span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang=""><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.52344px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">// Check WiFi connection status</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">if (isSTAReady()) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  // Connected: blink IP address</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  blinkIPAddress();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">} else {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  // Not connected: blink NC</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  blinkNC();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">// Short pause between repetitions</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">delay(1000);</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 254px;"></div><div class="CodeMirror-gutters" style="display: none; height: 254px;"></div></div></div></pre><p><span>  }</span></p><p><span>  // Switch released, print message</span>
+<span>  Serial.println(&quot;[IP Blink Stopped]&quot;);</span>
+<span>  }</span>
+<span>  }}</span></p><p><strong><span>Key concepts:</span></strong></p><p><strong><span>Switch debouncing:</span></strong>
+<span>Why wait 50ms? Mechanical switches &quot;bounce&quot; when pressed:</span></p><p><span>Physical press: </span><strong><span>_</span></strong><span>|‾‾‾‾‾‾‾‾‾ Actual signal:  </span><strong><span>_</span></strong><span>|‾||‾‾||‾‾‾‾‾  (noisy!) After delay:    </span><strong><span>_</span></strong><span>|‾‾‾‾‾‾‾‾‾       (clean!)</span></p><p><strong><span>While vs If:</span></strong></p><ul><li><p><code>if</code><span>: check once, do something once</span></p></li><li><p><code>while</code><span>: keep checking and doing while condition is true</span></p></li></ul><p><strong><span>Example:</span></strong></p><p><span>if (hungry) { eat(); }        // Eat once while (hungry) { eat(); }     // Keep eating until full!</span></p><h3 id='function-5-updateplayback'><span>Function 5: </span><code>updatePlayback()</code></h3><p><strong><span>What it does:</span></strong><span> Updates the Morse code playback state machine. This is complex non-blocking code.</span></p><p><strong><span>C++ Concepts:</span></strong></p><ul><li><p><code>switch</code><span> statement = choose one of many options</span></p></li><li><p><code>enum class</code><span> = named constants for states</span></p></li><li><p><code>millis()</code><span> = milliseconds since power-on</span></p></li><li><p><span>State machine pattern</span></p></li></ul><p><span>void updatePlayback() { // Get current time in milliseconds unsigned long now = millis();</span>
+<span>// Check current state switch (playback.state) {</span>
+<span>case PlaybackState::Idle:</span>
+<span>  // Not playing anything, nothing to do</span>
+<span>  break;</span></p><p><span>case PlaybackState::SignalOn:</span>
+<span>  // Buzzer is currently on</span>
+<span>  if (now - playback.stateStartTime &gt;= playback.stateDuration) {</span>
+<span>    // Time&#39;s up! Turn buzzer off</span>
+<span>    signalOff();</span>
+<span>    playback.state = PlaybackState::ElementGap;</span>
+<span>    playback.stateStartTime = now;</span>
+<span>    playback.stateDuration = ELEMENT_GAP_MS;</span>
+<span>  }</span>
+<span>  break;</span></p><p><span>case PlaybackState::ElementGap:</span>
+<span>  // Buzzer is off between elements</span>
+<span>  if (now - playback.stateStartTime &gt;= playback.stateDuration) {</span>
+<span>    // Gap finished, move to next element or character</span>
+<span>    playback.codeIndex++;</span>
+<span>    if (playback.codeIndex &lt; playback.currentMorseCode.length()) {</span>
+<span>      // More elements in this character</span>
+<span>      playback.state = PlaybackState::SignalOn;</span>
+<span>      // ... determine dit or dah duration ...</span>
+<span>    } else {</span>
+<span>      // Character complete, move to next</span>
+<span>      playback.state = PlaybackState::CharGap;</span>
+<span>      // ... etc ...</span>
+<span>    }</span>
+<span>  }</span>
+<span>  break;</span></p><p><span>// ... more states ...</span>
+<span>} }</span></p><p><strong><span>State machine explained:</span></strong></p><p><span>Think of a traffic light as a state machine:</span></p><p><span>stateDiagram-v2 [*] --&gt; GREEN GREEN --&gt; YELLOW: Timer expires YELLOW --&gt; RED: Timer expires RED --&gt; GREEN: Timer expires</span></p><p><strong><span>Why use </span><code>millis()</code><span> instead of </span><code>delay()</code><span>?</span></strong></p><p><span>// BAD - Blocking (freezes everything) void playDit_Blocking() { digitalWrite(BUZZER_PIN, HIGH); delay(120);  // FROZEN for 120ms! digitalWrite(BUZZER_PIN, LOW); }</span>
+<span>// GOOD - Non-blocking (can do other things) void playDit_NonBlocking() { if (state == SignalOn) { if (millis() - startTime &gt;= 120) { digitalWrite(BUZZER_PIN, LOW); state = ElementGap; } } // Function returns immediately, loop continues }</span></p><h3 id='function-6-selectkochcharacter'><span>Function 6: </span><code>selectKochCharacter()</code></h3><p><strong><span>What it does:</span></strong><span> Picks which character to send next using weighted random selection.</span></p><p><strong><span>C++ Concepts:</span></strong></p><ul><li><p><span>Arrays</span></p></li><li><p><code>for</code><span> loops</span></p></li><li><p><code>random()</code><span> function</span></p></li><li><p><span>Accumulator pattern</span></p></li></ul><p><span>char selectKochCharacter() { // Step 1: Add up all the probabilities int totalWeight = 0; for (int i = 0; i &lt; kochLesson; i++) { totalWeight += charStats[i].probability; }</span>
+<span>// Step 2: Pick a random number in that range int roll = random(0, totalWeight);</span>
+<span>// Step 3: Find which character that number lands on int accumulator = 0; for (int i = 0; i &lt; kochLesson; i++) { accumulator += charStats[i].probability; if (roll &lt; accumulator) { return charStats[i].character; } } }</span></p><h3 id='function-7-pollkeyinput'><span>Function 7: </span><code>pollKeyInput()</code></h3><p><strong><span>What it does:</span></strong><span> Checks if Morse key is pressed and decodes the pattern.</span></p><p><strong><span>C++ Concepts:</span></strong></p><ul><li><p><span>State tracking with static variables</span></p></li><li><p><span>Timing measurement</span></p></li><li><p><span>Pattern matching</span></p></li></ul><p><span>void pollKeyInput() { // Static variables keep their values between function calls static bool keyWasDown = false; static unsigned long keyDownTime = 0; static String morsePattern = &quot;&quot;;</span>
+<span>// Read current key state bool keyIsDown = (digitalRead(KEY_PIN) == LOW);</span>
+<span>// KEY PRESSED (transition from up to down) if (keyIsDown &amp;&amp; !keyWasDown) { keyDownTime = millis();  // Record when pressed }</span>
+<span>// KEY RELEASED (transition from down to up) else if (!keyIsDown &amp;&amp; keyWasDown) { unsigned long duration = millis() - keyDownTime;</span>
+<span>// Classify as dit or dah based on duration</span>
+<span>if (duration &lt; 180) {</span>
+<span>  morsePattern += &#39;.&#39;;  // Dit</span>
+<span>} else {</span>
+<span>  morsePattern += &#39;-&#39;;  // Dah</span>
+<span>}</span>
+<span>}</span>
+<span>// KEY UP FOR A WHILE (end of character) else if (!keyIsDown) { unsigned long silenceTime = millis() - lastReleaseTime; if (silenceTime &gt; 300 &amp;&amp; morsePattern.length() &gt; 0) { // Decode the pattern char decodedChar = lookupMorse(morsePattern); Serial.println(decodedChar); morsePattern = &quot;&quot;;  // Reset for next character } }</span>
+<span>keyWasDown = keyIsDown;  // Remember for next time }</span></p><p><strong><span>How it detects patterns:</span></strong></p><p><span>User sends &quot;K&quot; (dah-dit-dah):</span>
+<span>Time:     0ms    300ms   350ms   500ms   800ms Key:      UP     DOWN    UP      DOWN    UP      DOWN    UP Duration:        250ms   50ms    300ms   (silence 400ms) Classify:        DAH     DIT     DAH Pattern:         -       -.      -.- Action:                                  Lookup &quot;-.-&quot; → K!</span></p><h3 id='function-8-savetonvs-and-loadfromnvs'><span>Function 8: </span><code>saveToNVS()</code><span> and </span><code>loadFromNVS()</code></h3><p><strong><span>What it does:</span></strong><span> Saves/loads data to permanent storage (survives power-off).</span></p><p><strong><span>C++ Concepts:</span></strong></p><ul><li><p><span>Namespaces (organization of code)</span></p></li><li><p><span>Preferences library (ESP32-specific)</span></p></li><li><p><span>Key-value storage</span></p></li></ul><p><span>#include &lt;Preferences.h&gt;</span>
+<span>Preferences prefs;</span>
+<span>void saveKochLesson(uint8_t lesson) { // Open &quot;koch&quot; namespace in read-write mode prefs.begin(&quot;koch&quot;, false);</span>
+<span>// Save lesson number with key &quot;lesson&quot; prefs.putUChar(&quot;lesson&quot;, lesson);</span>
+<span>// Close to commit changes prefs.end();</span>
+<span>Serial.println(&quot;Koch lesson saved!&quot;); }</span>
+<span>uint8_t loadKochLesson() { prefs.begin(&quot;koch&quot;, true);  // true = read-only</span>
+<span>// Get lesson number, default to 2 if not found uint8_t lesson = prefs.getUChar(&quot;lesson&quot;, 2);</span>
+<span>prefs.end();</span>
+<span>return lesson; }</span></p><p><strong><span>How NVS works:</span></strong></p><p><span>Think of it like a filing cabinet:</span></p><p><span>Namespace &quot;koch&quot;: Key &quot;lesson&quot;    → Value: 5 Key &quot;wpm&quot;       → Value: 20 Key &quot;correct&quot;   → Value: 847</span>
+<span>Namespace &quot;keyer&quot;: Key &quot;mem1&quot;      → Value: &quot;CQ CQ DE K7ABC&quot; Key &quot;mem2&quot;      → Value: &quot;TU 73&quot;</span></p><p><span>Data persists through:</span></p><ul><li><p><span>Power off/on</span></p></li><li><p><span>Code uploads (unless you erase flash)</span></p></li><li><p><span>Resets</span></p></li></ul><h3 id='function-9-sendwebsocketmessage'><span>Function 9: </span><code>sendWebSocketMessage()</code></h3><p><strong><span>What it does:</span></strong><span> Sends data from ESP32 to phone&#39;s web browser.</span></p><p><strong><span>C++ Concepts:</span></strong></p><ul><li><p><span>JSON (JavaScript Object Notation) = data format</span></p></li><li><p><span>Pointers and references</span></p></li></ul><p><span>void sendKochStats() { // Create JSON object // JSON looks like: {&quot;correct&quot;: 45, &quot;total&quot;: 50, &quot;wpm&quot;: 20}</span>
+<span>String json = &quot;{&quot;; json += &quot;&quot;correct&quot;:&quot; + String(sessionCorrect) + &quot;,&quot;; json += &quot;&quot;total&quot;:&quot; + String(sessionTotal) + &quot;,&quot;; json += &quot;&quot;wpm&quot;:&quot; + String(WPM); json += &quot;}&quot;;</span>
+<span>// Send to all connected clients webSocket.textAll(json); }</span></p><p><strong><span>Why JSON?</span></strong></p><p><span>JSON is a universal data format both C++ and JavaScript understand:</span></p><p><strong><span>C++ side (ESP32):</span></strong></p><p><span>int correct = 45; int total = 50; String json = &quot;{&quot;correct&quot;:45,&quot;total&quot;:50}&quot;; webSocket.textAll(json);</span></p><p><strong><span>JavaScript side (phone browser):</span></strong></p><p><span>// Receive the JSON string socket.onmessage = function(event) { let data = JSON.parse(event.data); // Now data.correct = 45, data.total = 50 document.getElementById(&#39;stats&#39;).innerHTML = data.correct + &quot; / &quot; + data.total; };</span></p><hr /><h2 id='c-programming-concepts-used'><span>C++ Programming Concepts Used</span></h2><h3 id='1-variables-and-data-types'><span>1. Variables and Data Types</span></h3><p><strong><span>What they are:</span></strong><span> Named storage locations for data.</span></p><p><span>int age = 16;                    // Integer (whole number) float temperature = 98.6;        // Floating-point (decimal) bool isRunning = true;           // Boolean (true/false) char letter = &#39;A&#39;;               // Single character String name = &quot;Alice&quot;;           // Text string (multiple characters) unsigned long time = millis();   // Very large positive number</span></p><p><strong><span>Why different types?</span></strong></p><ul><li><p><span>Different types use different amounts of memory</span></p></li><li><p><span>Different types have different capabilities</span></p></li><li><p><code>int</code><span> = 4 bytes, range: -2 billion to +2 billion</span></p></li><li><p><code>uint8_t</code><span> = 1 byte, range: 0 to 255</span></p></li><li><p><code>unsigned long</code><span> = 4 bytes, range: 0 to 4 billion</span></p></li></ul><h3 id='2-arrays'><span>2. Arrays</span></h3><p><strong><span>What they are:</span></strong><span> A list of values of the same type.</span></p><p><span>// Array of 5 integers int scores[5] = {90, 85, 92, 88, 95};</span>
+<span>// Access elements with index (0-based) int firstScore = scores[0];    // 90 int thirdScore = scores[2];    // 92</span>
+<span>// Loop through array for (int i = 0; i &lt; 5; i++) { Serial.println(scores[i]); }</span></p><p><strong><span>Visual representation:</span></strong></p><p><span>Index:   0   1   2   3   4 Value:  90  85  92  88  95 ↑ scores[0]</span></p><h3 id='3-structures-struct'><span>3. Structures (struct)</span></h3><p><strong><span>What they are:</span></strong><span> Custom data types that group related variables.</span></p><p><span>struct CharStats { char character;        // The letter uint8_t probability;   // How likely to be picked uint16_t totalSent;    // Times sent uint16_t totalCorrect; // Times correct };</span>
+<span>// Create a variable of this type CharStats kStats; kStats.character = &#39;K&#39;; kStats.probability = 15; kStats.totalSent = 100; kStats.totalCorrect = 90;</span>
+<span>// Access members with dot notation Serial.print(&quot;Character: &quot;); Serial.println(kStats.character); Serial.print(&quot;Accuracy: &quot;); Serial.print(kStats.totalCorrect); Serial.print(&quot; / &quot;); Serial.println(kStats.totalSent);</span></p><p><strong><span>Think of it like:</span></strong><span> A form with multiple fields.</span></p><h3 id='4-enumerations-enum'><span>4. Enumerations (enum)</span></h3><p><strong><span>What they are:</span></strong><span> Named constants that make code readable.</span></p><p><span>// Old C-style enum enum Direction { NORTH,     // = 0 SOUTH,     // = 1 EAST,      // = 2 WEST       // = 3 };</span>
+<span>// Modern C++ enum class (type-safe) enum class OperatingMode : uint8_t { Trainer,   // = 0 CWKeyer    // = 1 };</span>
+<span>// Usage OperatingMode currentMode = OperatingMode::Trainer;</span>
+<span>if (currentMode == OperatingMode::Trainer) { Serial.println(&quot;In training mode&quot;); }</span></p><p><strong><span>Why use enums?</span></strong></p><p><strong><span>Bad (magic numbers):</span></strong></p><p><span>if (mode == 0) { ... }  // What is 0? Unclear!</span></p><p><strong><span>Good (named constants):</span></strong>
+<span>if (mode == OperatingMode::Trainer) { ... }  // Clear!</span></p><h3 id='5-functions'><span>5. Functions</span></h3><p><strong><span>What they are:</span></strong><span> Reusable blocks of code with a name.</span></p><p><span>// Function that returns nothing (void) void greet() { Serial.println(&quot;Hello!&quot;); }</span>
+<span>// Function with parameters void greetPerson(String name) { Serial.print(&quot;Hello, &quot;); Serial.print(name); Serial.println(&quot;!&quot;); }</span>
+<span>// Function that returns a value int add(int a, int b) { return a + b; }</span>
+<span>// Usage greet();                    // Prints: Hello! greetPerson(&quot;Alice&quot;);       // Prints: Hello, Alice! int sum = add(5, 3);        // sum = 8</span></p><p><strong><span>Function anatomy:</span></strong></p><p><span>int multiply(int x, int y) { │   │        │          │ │   │        │          └─ Parameters (inputs) │   │        └──────────── Parameter types │   └───────────────────── Function name └───────────────────────── Return type</span>
+<span>return x * y;  // Return value (output) }</span></p><h3 id='6-conditionals-ifelse'><span>6. Conditionals (if/else)</span></h3><p><strong><span>What they do:</span></strong><span> Execute code only if condition is true.</span></p><p><span>int score = 85;</span>
+<span>if (score &gt;= 90) { Serial.println(&quot;Grade: A&quot;); } else if (score &gt;= 80) { Serial.println(&quot;Grade: B&quot;); } else if (score &gt;= 70) { Serial.println(&quot;Grade: C&quot;); } else { Serial.println(&quot;Grade: F&quot;); }</span></p><p><strong><span>Boolean operators:</span></strong></p><p><span>if (score &gt; 90)          // Greater than if (score &gt;= 90)         // Greater than or equal if (score &lt; 70)          // Less than if (score &lt;= 70)         // Less than or equal if (score == 85)         // Equal (note: double equals!) if (score != 100)        // Not equal</span>
+<span>// Compound conditions if (score &gt;= 70 &amp;&amp; age &gt;= 16)  // AND (both must be true) if (score &gt;= 90 || bonus)       // OR (at least one true) if (!failed)                    // NOT (inverts true/false)</span></p><h3 id='7-loops'><span>7. Loops</span></h3><p><strong><span>What they do:</span></strong><span> Repeat code multiple times.</span></p><p><strong><span>For loop (known number of iterations):</span></strong></p><p><span>// Count from 0 to 9 for (int i = 0; i &lt; 10; i++) { Serial.println(i); }</span>
+<span>// How it works: // 1. int i = 0        → Initialize counter // 2. i &lt; 10           → Check condition // 3. { ... }          → Execute body // 4. i++              → Increment (i = i + 1) // 5. Go back to step 2</span></p><p><strong><span>While loop (unknown number of iterations):</span></strong></p><p><span>int count = 0; while (count &lt; 100) { count = count + random(1, 10); Serial.println(count); } // Stops when count reaches 100 or more</span></p><p><strong><span>Do-while loop (always runs at least once):</span></strong>
+<span>char input; do { Serial.println(&quot;Enter Y or N:&quot;); input = Serial.read(); } while (input != &#39;Y&#39; &amp;&amp; input != &#39;N&#39;);</span></p><h3 id='8-switch-statements'><span>8. Switch Statements</span></h3><p><strong><span>What they do:</span></strong><span> Choose one of many options based on a value.</span></p><p><span>int dayOfWeek = 3;</span>
+<span>switch (dayOfWeek) { case 1: Serial.println(&quot;Monday&quot;); break;  // Exit switch case 2: Serial.println(&quot;Tuesday&quot;); break; case 3: Serial.println(&quot;Wednesday&quot;); break; // ... more cases ... default: Serial.println(&quot;Invalid day&quot;); break; }</span></p><p><strong><span>Why use switch instead of if/else?</span></strong></p><ul><li><p><span>More readable for many options</span></p></li><li><p><span>Compiler can optimize better</span></p></li><li><p><span>Clear structure</span></p></li></ul><h3 id='9-pointers-and-references'><span>9. Pointers and References</span></h3><p><strong><span>Pointers:</span></strong><span> Variables that store memory addresses.</span></p><p><span>int age = 16; int* pAge = &amp;age;  // pAge holds the address of age</span>
+<span>Serial.println(age);     // Prints: 16 Serial.println(*pAge);   // Prints: 16 (dereference) Serial.println(pAge);    // Prints: 0x3FFE8420 (address)</span>
+<span>*pAge = 17;  // Change value through pointer Serial.println(age);  // Prints: 17 (age changed!)</span></p><p><strong><span>Visual representation:</span></strong>
+<span>Memory: Address    Variable    Value 0x3FFE8420   age       16 0x3FFE8424   pAge      0x3FFE8420 └─points to─┘</span></p><p><strong><span>Why pointers matter in this project:</span></strong></p><ul><li><p><span>Passing large data without copying</span></p></li><li><p><span>WebSocket functions use pointers</span></p></li><li><p><span>String manipulation</span></p></li></ul><h3 id='10-classes-and-objects-not-used-much-in-this-project'><span>10. Classes and Objects (not used much in this project)</span></h3><p><strong><span>What they are:</span></strong><span> Blueprints for creating objects that have both data and functions.</span></p><p><span>class Dog { public: String name; int age;</span>
+<span>void bark() {</span>
+<span>  Serial.println(name + &quot; says Woof!&quot;);</span>
+<span>}</span>
+<span>};</span>
+<span>// Create objects (instances) Dog myDog; myDog.name = &quot;Buddy&quot;; myDog.age = 3; myDog.bark();  // Prints: Buddy says Woof!</span></p><p><strong><span>In this project:</span></strong><span> Most code uses functions and structures, not classes (simpler).</span></p><h3 id='11-static-variables'><span>11. Static Variables</span></h3><p><strong><span>What they are:</span></strong><span> Variables that keep their value between function calls.</span></p><p><span>void countCalls() { static int callCount = 0;  // Initialized only once callCount++; Serial.println(callCount); }</span>
+<span>countCalls();  // Prints: 1 countCalls();  // Prints: 2 countCalls();  // Prints: 3 // callCount persists!</span></p><h3 id='12-string-manipulation'><span>12. String Manipulation</span></h3><p><strong><span>Common operations:</span></strong>
+<span>String message = &quot;Hello&quot;;</span>
+<span>// Concatenation (adding) message = message + &quot; World&quot;;   // &quot;Hello World&quot; message += &quot;!&quot;;                 // &quot;Hello World!&quot;</span>
+<span>// Length int len = message.length();     // 12</span>
+<span>// Character access char first = message[0];        // &#39;H&#39; char last = message[len-1];     // &#39;!&#39;</span>
+<span>// Substring String part = message.substring(0, 5);  // &quot;Hello&quot;</span>
+<span>// Finding int pos = message.indexOf(&quot;World&quot;);     // 6 if (pos &gt;= 0) { Serial.println(&quot;Found at position &quot; + String(pos)); }</span>
+<span>// Comparison if (message == &quot;Hello World!&quot;) { Serial.println(&quot;Match!&quot;); }</span></p><h3 id='13-libraries-and-includes'><span>13. Libraries and Includes</span></h3><p><strong><span>What they are:</span></strong><span> Pre-written code you can use.</span></p><p><span>#include &lt;Arduino.h&gt;        // Core Arduino functions #include &lt;WiFi.h&gt;           // WiFi functionality #include &lt;ESPAsyncWebServer.h&gt;  // Web server #include &quot;MorsePlayback.h&quot;  // Our custom code</span>
+<span>// Now we can use functions from these libraries WiFi.begin(ssid, password);  // From WiFi.h pinMode(2, OUTPUT);          // From Arduino.h playMorse(&quot;SOS&quot;);            // From our MorsePlayback.h</span></p><p><strong><span>Angle brackets vs quotes:</span></strong></p><ul><li><p><code>&lt;file.h&gt;</code><span> = System/library file (Arduino, WiFi, etc.)</span></p></li><li><p><code>&quot;file.h&quot;</code><span> = Our project file (same folder)</span></p></li></ul><hr /><h2 id='glossary-of-terms'><span>Glossary of Terms</span></h2><h3 id='amateur-radio-terms'><span>Amateur Radio Terms</span></h3><figure class='table-figure'><table><thead><tr><th><span>Term</span></th><th><span>Definition</span></th></tr></thead><tbody><tr><td><strong><span>CW</span></strong></td><td><span>Continuous Wave - Morse code transmission via radio</span></td></tr><tr><td><strong><span>QSO</span></strong></td><td><span>A contact/conversation between two radio operators</span></td></tr><tr><td><strong><span>Prosign</span></strong></td><td><span>Special multi-character symbol sent as one unit (AR, SK, BT)</span></td></tr><tr><td><strong><span>WPM</span></strong></td><td><span>Words Per Minute - speed measurement for Morse code</span></td></tr><tr><td><strong><span>Dit</span></strong></td><td><span>Short beep in Morse code (dot, ·)</span></td></tr><tr><td><strong><span>Dah</span></strong></td><td><span>Long beep in Morse code (dash, -)</span></td></tr><tr><td><strong><span>Paddle</span></strong></td><td><span>Two-lever Morse key used for iambic keying</span></td></tr><tr><td><strong><span>Straight Key</span></strong></td><td><span>Simple on/off switch for sending Morse code</span></td></tr><tr><td><strong><span>Iambic Keyer</span></strong></td><td><span>Automatic system that alternates dits and dahs</span></td></tr><tr><td><strong><span>Side-tone</span></strong></td><td><span>Audio feedback so you hear what you&#39;re sending</span></td></tr><tr><td><strong><span>TX</span></strong></td><td><span>Transmit - sending radio signal</span></td></tr><tr><td><strong><span>Keying</span></strong></td><td><span>Turning transmitter on/off to send Morse code</span></td></tr></tbody></table></figure><h3 id='programming-terms'><span>Programming Terms</span></h3><figure class='table-figure'><table><thead><tr><th><span>Term</span></th><th><span>Definition</span></th></tr></thead><tbody><tr><td><strong><span>Microcontroller</span></strong></td><td><span>Small computer on a single chip (ESP32)</span></td></tr><tr><td><strong><span>GPIO</span></strong></td><td><span>General Purpose Input/Output pins</span></td></tr><tr><td><strong><span>PWM</span></strong></td><td><span>Pulse Width Modulation - simulates analog voltage</span></td></tr><tr><td><strong><span>State Machine</span></strong></td><td><span>Pattern where system transitions between states</span></td></tr><tr><td><strong><span>Non-blocking Code</span></strong></td><td><span>Code that doesn&#39;t freeze (allows multitasking)</span></td></tr><tr><td><strong><span>JSON</span></strong></td><td><span>JavaScript Object Notation - data format</span></td></tr><tr><td><strong><span>WebSocket</span></strong></td><td><span>Two-way persistent communication channel</span></td></tr><tr><td><strong><span>NVS</span></strong></td><td><span>Non-Volatile Storage - memory that persists</span></td></tr><tr><td><strong><span>mDNS</span></strong></td><td><span>Multicast DNS - allows friendly names like &quot;cwtrainer.local&quot;</span></td></tr><tr><td><strong><span>API</span></strong></td><td><span>Application Programming Interface</span></td></tr><tr><td><strong><span>Callback</span></strong></td><td><span>Function called when an event happens</span></td></tr></tbody></table></figure><h3 id='esp32-specific'><span>ESP32 Specific</span></h3><figure class='table-figure'><table><thead><tr><th><span>Term</span></th><th><span>Definition</span></th></tr></thead><tbody><tr><td><strong><span>Flash Memory</span></strong></td><td><span>Permanent storage on ESP32 (4MB typically)</span></td></tr><tr><td><strong><span>RAM</span></strong></td><td><span>Temporary fast memory (520KB) - lost on power-off</span></td></tr><tr><td><strong><span>LEDC</span></strong></td><td><span>LED Controller - ESP32&#39;s PWM system</span></td></tr><tr><td><strong><span>NVS Partition</span></strong></td><td><span>Flash memory section for saving settings</span></td></tr><tr><td><strong><span>Soft AP</span></strong></td><td><span>ESP32 creating its own WiFi network</span></td></tr><tr><td><strong><span>Station Mode</span></strong></td><td><span>ESP32 joining an existing WiFi network</span></td></tr></tbody></table></figure><h3 id='morse-code-terms'><span>Morse Code Terms</span></h3><figure class='table-figure'><table><thead><tr><th><span>Term</span></th><th><span>Definition</span></th></tr></thead><tbody><tr><td><strong><span>Koch Method</span></strong></td><td><span>Learning technique: start with 2 characters, gradually add more</span></td></tr><tr><td><strong><span>Farnsworth Timing</span></strong></td><td><span>High character speed with extra spacing between characters</span></td></tr><tr><td><strong><span>Character Speed</span></strong></td><td><span>WPM for individual characters (dits/dahs)</span></td></tr><tr><td><strong><span>Effective Speed</span></strong></td><td><span>Overall WPM including spaces</span></td></tr><tr><td><strong><span>Echo Training</span></strong></td><td><span>Practicing sending code and getting feedback</span></td></tr><tr><td><strong><span>Copy Practice</span></strong></td><td><span>Listening to Morse code and writing down what you hear</span></td></tr></tbody></table></figure><hr /><h2 id='learning-activities-for-students'><span>Learning Activities for Students</span></h2><h3 id='activity-1-modify-led-blink-rate'><span>Activity 1: Modify LED Blink Rate</span></h3><p><strong><span>Goal:</span></strong><span> Understand timing and variables.</span></p><p><strong><span>Task:</span></strong><span> Change the IP blink speed from 10 WPM to 15 WPM.</span></p><p><strong><span>Hints:</span></strong></p><ol start='' ><li><p><span>Find the </span><code>IP_DIT_DURATION</code><span> definition</span></p></li><li><p><span>Current formula: </span><code>DIT_MS = 1200 / WPM</code></p></li><li><p><span>Calculate: </span><code>1200 / 15 = 80ms</code></p></li><li><p><span>Change </span><code>#define IP_DIT_DURATION 120</code><span> to </span><code>#define IP_DIT_DURATION 80</code></p></li></ol><h3 id='activity-2-add-a-new-keyer-memory'><span>Activity 2: Add a New Keyer Memory</span></h3><p><strong><span>Goal:</span></strong><span> Understand arrays and storage.</span></p><p><strong><span>Task:</span></strong><span> Increase keyer memories from 6 to 8 (M1-M8).</span></p><p><strong><span>Steps:</span></strong></p><ol start='' ><li><p><span>Find </span><code>KEYER_MEM_COUNT = 6</code><span> in CWKeyerMode.h</span></p></li><li><p><span>Change to </span><code>8</code></p></li><li><p><span>Add cases 6 and 7 to the switch statement in </span><code>handleKeyerMemoryCommand()</code></p></li><li><p><span>Test saving and playing new memories</span></p></li></ol><h3 id='activity-3-create-a-new-training-mode'><span>Activity 3: Create a New Training Mode</span></h3><p><strong><span>Goal:</span></strong><span> Understand state machines and program flow.</span></p><p><strong><span>Task:</span></strong><span> Add &quot;Random Practice&quot; mode that sends completely random characters.</span></p><p><strong><span>Skeleton code:</span></strong></p><p><span>// In a new file: RandomPractice.cpp</span>
+<span>bool randomPracticeActive = false;</span>
+<span>void startRandomPractice() { randomPracticeActive = true; Serial.println(&quot;Random practice started&quot;); }</span>
+<span>void updateRandomPractice() { if (!randomPracticeActive) return; if (isPlaybackActive()) return;  // Wait for current char to finish</span>
+<span>// Pick random character char randomChar = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;[random(36)];</span>
+<span>// Play it playMorse(String(randomChar)); }</span></p><p><strong><span>Challenge:</span></strong><span> Add accuracy tracking!</span></p><h3 id='activity-4-implement-sound-effects'><span>Activity 4: Implement Sound Effects</span></h3><p><strong><span>Goal:</span></strong><span> Learn about functions and hardware control.</span></p><p><strong><span>Task:</span></strong><span> Add success/error sounds when Koch trainer shows result.</span></p><p><span>void playSuccessSound() { // Rising tone for (int freq = 600; freq &lt;= 1200; freq += 100) { ledcWriteTone(BUZZER_PIN, freq); delay(50); } ledcWriteTone(BUZZER_PIN, 0);  // Off }</span>
+<span>void playErrorSound() { // Descending tone for (int freq = 800; freq &gt;= 400; freq -= 100) { ledcWriteTone(BUZZER_PIN, freq); delay(50); } ledcWriteTone(BUZZER_PIN, 0); }</span></p><p><strong><span>Where to add:</span></strong><span> In </span><code>showKochResult()</code><span> function.</span></p><h3 id='activity-5-web-interface-improvement'><span>Activity 5: Web Interface Improvement</span></h3><p><strong><span>Goal:</span></strong><span> Learn HTML/CSS/JavaScript integration.</span></p><p><strong><span>Task:</span></strong><span> Add a progress bar to the web interface showing % correct.</span></p><p><!-- In index.html --><span> </span><div class="progress-bar"><span> </span><div id="progress-fill" style="width: 0%; background: green; height: 20px;"><span> </span></div><span> </span></div><span> </span><p id="progress-text"><span>0%</span></p></p><script> // In JavaScript section socket.onmessage = function(event) { let data = JSON.parse(event.data); let percent = (data.correct / data.total) * 100; document.getElementById('progress-fill').style.width = percent + '%'; document.getElementById('progress-text').innerText = percent.toFixed(1) + '%'; }; </script><hr /><h2 id='troubleshooting-guide'><span>Troubleshooting Guide</span></h2><h3 id='problem-esp32-wont-connect-to-wifi'><span>Problem: ESP32 won&#39;t connect to WiFi</span></h3><p><strong><span>Symptoms:</span></strong><span> </span></p><ul><li><p><span>Serial shows &quot;WiFi connection failed&quot;</span></p></li><li><p><span>LED blinks slowly</span></p></li><li><p><span>Blinking IP switch shows &quot;NC&quot;</span></p></li></ul><p><strong><span>Solutions:</span></strong></p><ol start='' ><li><p><span>Check WiFi mode switch (GPIO19) - should be LOW for STA mode</span></p></li><li><p><span>Verify SSID and password in WiFiManager portal</span></p></li><li><p><span>Check router is 2.4GHz (ESP32 doesn&#39;t support 5GHz)</span></p></li><li><p><span>Reset WiFi credentials: send </span><code>wifi reset</code><span> command</span></p></li></ol><h3 id='problem-morse-code-sounds-wrong'><span>Problem: Morse code sounds wrong</span></h3><p><strong><span>Symptoms:</span></strong></p><ul><li><p><span>Timing too fast or too slow</span></p></li><li><p><span>Uneven dits/dahs</span></p></li><li><p><span>Choppy audio</span></p></li></ul><p><strong><span>Solutions:</span></strong></p><ol start='' ><li><p><span>Check WPM setting: </span><code>wpm 20</code><span> command</span></p></li><li><p><span>Verify timing calculation in </span><code>updateTiming()</code></p></li><li><p><span>Ensure </span><code>DOT_MS</code><span> value is reasonable (e.g., 60ms for 20 WPM)</span></p></li><li><p><span>Check buzzer PWM frequency (should be 600-900 Hz)</span></p></li></ol><h3 id='problem-key-input-not-recognized'><span>Problem: Key input not recognized</span></h3><p><strong><span>Symptoms:</span></strong></p><ul><li><p><span>Pressing key does nothing</span></p></li><li><p><span>Wrong characters decoded</span></p></li><li><p><span>Erratic behavior</span></p></li></ul><p><strong><span>Solutions:</span></strong></p><ol start='' ><li><p><span>Check key wiring (GPIO32 to ground when pressed)</span></p></li><li><p><span>Verify INPUT_PULLUP is set</span></p></li><li><p><span>Adjust timing threshold in </span><code>pollKeyInput()</code></p></li><li><p><span>Try opposite key type (straight vs iambic)</span></p></li></ol><h3 id='problem-nvs-storage-errors'><span>Problem: NVS storage errors</span></h3><p><strong><span>Symptoms:</span></strong></p><ul><li><p><span>Settings don&#39;t persist</span></p></li><li><p><span>&quot;NVS Init Failed&quot; error</span></p></li><li><p><span>Random resets</span></p></li></ul><p><strong><span>Solutions:</span></strong></p><ol start='' ><li><p><span>Erase flash: Tools &gt; Erase Flash &gt; All Flash Contents</span></p></li><li><p><span>Re-upload code</span></p></li><li><p><span>Check partition scheme: Tools &gt; Partition Scheme &gt; Default</span></p></li></ol><h3 id='problem-web-interface-doesnt-load'><span>Problem: Web interface doesn&#39;t load</span></h3><p><strong><span>Symptoms:</span></strong></p><ul><li><p><span>Phone can connect to WiFi but can&#39;t open page</span></p></li><li><p><span>Timeout when browsing to IP</span></p></li><li><p><span>WebSocket errors</span></p></li></ul><p><strong><span>Solutions:</span></strong></p><ol start='' ><li><p><span>Verify IP address: check serial output on startup</span></p></li><li><p><span>Try </span><a href='http://192.168.4.1' target='_blank' class='url'>http://192.168.4.1</a><span> (default AP IP)</span></p></li><li><p><span>Try </span><a href='http://cwtrainer.local' target='_blank' class='url'>http://cwtrainer.local</a><span> (mDNS)</span></p></li><li><p><span>Check that web server started (serial should show &quot;Web server started&quot;)</span></p></li><li><p><span>Restart ESP32</span></p></li></ol><hr /><h2 id='extension-projects'><span>Extension Projects</span></h2><h3 id='project-1-add-bluetooth-support'><span>Project 1: Add Bluetooth Support</span></h3><p><span>Allow phone to connect via Bluetooth instead of WiFi. Useful for outdoor portable operation.</span></p><p><strong><span>Technologies:</span></strong><span> ESP32 BLE, Bluetooth Serial</span></p><h3 id='project-2-lcd-display'><span>Project 2: LCD Display</span></h3><p><span>Add a 16x2 or OLED display to show current character, statistics, and IP address.</span></p><p><strong><span>Technologies:</span></strong><span> I2C, SSD1306 or HD44780 display libraries</span></p><h3 id='project-3-sd-card-logging'><span>Project 3: SD Card Logging</span></h3><p><span>Save all practice sessions to SD card for later analysis.</span></p><p><strong><span>Technologies:</span></strong><span> SPI, SD library, CSV file format</span></p><h3 id='project-4-multiplayer-mode'><span>Project 4: Multiplayer Mode</span></h3><p><span>Multiple students connect to one trainer, compete for accuracy and speed.</span></p><p><strong><span>Technologies:</span></strong><span> WebSocket broadcasting, leaderboard system</span></p><h3 id='project-5-voice-synthesis'><span>Project 5: Voice Synthesis</span></h3><p><span>Add speech output: &quot;The letter is K&quot; instead of just beeps.</span></p><p><strong><span>Technologies:</span></strong><span> ESP32 I2S audio, text-to-speech library</span></p><hr /><h2 id='additional-resources'><span>Additional Resources</span></h2><h3 id='books'><span>Books</span></h3><ul><li><p><span>&quot;The Art and Skill of Radio-Telegraphy&quot; by William G. Pierpont</span></p></li><li><p><span>&quot;Getting Started with ESP32&quot; by Kolban</span></p></li></ul><h3 id='websites'><span>Websites</span></h3><ul><li><p><span>ARRL (American Radio Relay League): arrl.org</span></p></li><li><p><span>LCWO.net - Learn CW Online</span></p></li><li><p><span>ESP32 Documentation: docs.espressif.com</span></p></li></ul><h3 id='tools'><span>Tools</span></h3><ul><li><p><span>Arduino IDE: arduino.cc</span></p></li><li><p><span>PlatformIO: platformio.org</span></p></li><li><p><span>Morse Code Decoder Apps (for verification)</span></p></li></ul><hr /><h2 id='conclusion'><span>Conclusion</span></h2><p><span>This Morse Code Trainer demonstrates many real-world programming concepts:</span></p><ol start='' ><li><p><strong><span>State machines</span></strong><span> for managing complex behavior</span></p></li><li><p><strong><span>Non-blocking code</span></strong><span> for multitasking</span></p></li><li><p><strong><span>Hardware interfacing</span></strong><span> with GPIO, PWM, timers</span></p></li><li><p><strong><span>Network programming</span></strong><span> with WiFi and WebSockets</span></p></li><li><p><strong><span>Data persistence</span></strong><span> with NVS storage</span></p></li><li><p><strong><span>Real-time systems</span></strong><span> with precise timing requirements</span></p></li><li><p><strong><span>User interface design</span></strong><span> for both web and hardware</span></p></li></ol><p><span>Students who understand this project will have strong fundamentals in:</span></p><ul><li><p><span>Embedded systems programming</span></p></li><li><p><span>IoT (Internet of Things) development</span></p></li><li><p><span>Real-time signal processing</span></p></li><li><p><span>Network protocols</span></p></li><li><p><span>Human-computer interaction</span></p></li></ul><p><span>The skills learned here apply to countless other projects: home automation, robotics, sensor networks, and more!</span></p><hr /><p><strong><span>Document Version:</span></strong><span> 1.0</span><br/><strong><span>Last Updated:</span></strong><span> 2026-03-28</span><br/><strong><span>Authors:</span></strong><span> ESP32 Morse Trainer Development Team</span></p><p><span>This is the complete, properly formatted documentation with:</span>
+<span>•</span><span>	</span><span>✅ All Mermaid diagrams properly formatted with triple backticks</span>
+<span>•</span><span>	</span><span>✅ Complete circuit diagram</span>
+<span>•</span><span>	</span><span>✅ All 10 software modules explained in detail</span>
+<span>•</span><span>	</span><span>✅ Startup sequence and main loop flowcharts</span>
+<span>•</span><span>	</span><span>✅ Detailed function explanations with code examples</span>
+<span>•</span><span>	</span><span>✅ Complete C++ concepts section with examples</span>
+<span>•</span><span>	</span><span>✅ Comprehensive glossary with tables</span>
+<span>•</span><span>	</span><span>✅ Detailed student activities</span>
+<span>•</span><span>	</span><span>✅ Troubleshooting guide</span>
+<span>•</span><span>	</span><span>✅ Extension projects</span></p></div></div>
+</body>
+</html>

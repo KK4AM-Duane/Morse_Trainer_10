@@ -1,0 +1,32 @@
+Enhancements to the morse trainer: 3/10/2026
+
+We want to allow user a choice in the echo training mode to source characters from two different user selectable character tables. Keep the current choice. Add a second choice to source from the PROGTABLE character table. Add the appropriate entries to the help menu for the serial monitor and add corresponding button on the phone. Make so the user can select between these two tables in the echo training mode. The existing stop button works as configured. Make that one button stop training for the echo training mode using either table.
+
+We will implement in hardware a selector switch with two positions. One position will select the CW Trainer. The second selector position will turn off the cw trainer entirely and turn on an iambic keyer for keying an external transmitter.
+
+In echo mode we currently we use a straight key only. Add menu options and phone buttons to allow the user to select straight key or the Iambic key for echo mode training. 
+
+
+- We will implement in hardware a selector switch with two positions. One position will select the CW Trainer.  The second selector position will turn off the cw trainer entirely and turn on an iambic keyer for keying an external transmitter.
+
+- In echo mode we have two user selectable input options. One option is to use a straight key as the input. The second option is to use an Iambic key instead. These options are selectable in the help menu through the serial port or with a phone API button.
+
+-Iambic key connection pins: GPIO32 for both Paddle Dit input and straight key connection. GPIO33 input pin for paddle Dash.
+
+- With an active high on pin GPIO18, the CW trainer will operate as described above. With a low on GPIO18, the ESP32 operates as a CW Keyer supplying a stream from Iambic key input to an output routed to a radio cw input jack.
+
+
+As for the ESP32, add a software selectable Iambic keyer mode feeding the existing echo trainer. Implement this mode as a button on the phone and a menu item in the help menu.
+
+
+Straight key and iambic key wiring:  Iambic key connection pins: GPIO32 for both Paddle Dit input and straight key connection. GPIO33 input pin for paddle Dash. 
+
+Iambic keyer Transmitter keying relay wiring: output pin for CW Keyer Mode to external transmitter GPIO23.
+
+Program all input pins with the internal pullup resistors.
+
+CW Speed set by phone or serial monitor.
+
+Add a file input method to transfer a text file to microcontroller memory, and send it to the buzzer and/or the phone audio under the control of the serial monitor or phone buttons. This is for text message decoding practice.
+
+

@@ -1,0 +1,63 @@
+<svg width="500" height="287.5" viewBox="0 0 500 287.5" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="500" height="287.5" fill="#d3d3d3" stroke="#a0a0a0" stroke-width="2"/>
+  
+  <!-- Border decoration -->
+  <rect x="5" y="5" width="490" height="277.5" fill="none" stroke="#2c5aa0" stroke-width="1.5"/>
+  
+  <!-- Main Title: Morse Code Trainer (moved to lower third) -->
+  <text x="250" y="200" font-family="Arial, sans-serif" font-size="36" font-weight="bold" 
+        fill="#2c5aa0" text-anchor="middle">
+    MORSE CODE TRAINER
+  </text>
+  
+  <!-- Subtitle: Memory Keyer -->
+  <text x="250" y="240" font-family="Arial, sans-serif" font-size="28" font-weight="bold" 
+        fill="#2c5aa0" text-anchor="middle">
+    Memory Keyer
+  </text>
+  
+  <!-- Decorative dots as underlines for MORSE and TRAINER -->
+  <!-- Left set (under MORSE) -->
+  <circle cx="100" cy="210" r="4" fill="#2c5aa0"/>
+  <circle cx="120" cy="210" r="4" fill="#2c5aa0"/>
+  <circle cx="140" cy="210" r="4" fill="#2c5aa0"/>
+  
+  <!-- Right set (under TRAINER) -->
+  <circle cx="360" cy="210" r="4" fill="#2c5aa0"/>
+  <circle cx="380" cy="210" r="4" fill="#2c5aa0"/>
+  <circle cx="400" cy="210" r="4" fill="#2c5aa0"/>
+  
+  <!-- Top Edge Vertical Text (Bottom to Top) -->
+  <!-- Text size increased from 10px to 13.3px (approximately one third larger) -->
+  
+  <!-- Column 1: Transmitter Keying at 2.125" (212.5px) -->
+  <text x="212.5" y="15" font-family="Arial, sans-serif" font-size="13.3" 
+        fill="#2c5aa0" text-anchor="end" transform="rotate(-90, 212.5, 15)">
+    Transmitter Keying
+  </text>
+  
+  <!-- Column 2: IP Address at 2.425" (242.5px) -->
+  <text x="242.5" y="15" font-family="Arial, sans-serif" font-size="13.3" 
+        fill="#2c5aa0" text-anchor="end" transform="rotate(-90, 242.5, 15)">
+    IP Address
+  </text>
+  
+  <!-- Column 3: Error at 2.725" (272.5px) -->
+  <text x="272.5" y="15" font-family="Arial, sans-serif" font-size="13.3" 
+        fill="#2c5aa0" text-anchor="end" transform="rotate(-90, 272.5, 15)">
+    Error
+  </text>
+  
+  <!-- Column 4: Correct at 3.025" (302.5px) -->
+  <text x="302.5" y="15" font-family="Arial, sans-serif" font-size="13.3" 
+        fill="#2c5aa0" text-anchor="end" transform="rotate(-90, 302.5, 15)">
+    Correct
+  </text>
+  
+  <!-- Reference lines for column positions (can be removed) -->
+  <line x1="212.5" y1="5" x2="212.5" y2="15" stroke="#95a5a6" stroke-width="0.5" opacity="0.3"/>
+  <line x1="242.5" y1="5" x2="242.5" y2="15" stroke="#95a5a6" stroke-width="0.5" opacity="0.3"/>
+  <line x1="272.5" y1="5" x2="272.5" y2="15" stroke="#95a5a6" stroke-width="0.5" opacity="0.3"/>
+  <line x1="302.5" y1="5" x2="302.5" y2="15" stroke="#95a5a6" stroke-width="0.5" opacity="0.3"/>
+</svg>

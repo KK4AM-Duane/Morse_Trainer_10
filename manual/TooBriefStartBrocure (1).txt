@@ -1,0 +1,55 @@
+ESP32 Morse Code Trainer Quick Start
+Part 1 — Phone / iPad / Browser Access
+1. Connect to WiFi
+•	AP mode: connect to ESP32_Morse_Trainer
+•	Password: morse1234
+•	Open http://192.168.4.1 or http://cwtrainer.local
+•	STA mode: connect the trainer to your hotspot/network first
+•	If setup is needed, join CW_Trainer_Setup
+•	Password: morse1234
+•	Then open http://cwtrainer.local or the trainer IP
+2. Morse Code Trainer
+•	Put the mode switch in Trainer
+•	Open the web page
+•	Start Koch or Echo training
+•	In Koch mode, tap/type the character you hear
+•	Adjust speed, buzzer, and key type from the web UI
+3. Memory Keyer
+•	Put the mode switch in CW Keyer
+•	Open the web page
+•	Enter text into memory slots M1–M6
+•	Save the message
+•	Press Play to transmit it
+•	Memory playback works only in CW Keyer mode
+---
+Part 2 — Serial Monitor Access
+1. Connect
+•	Open the serial monitor at 115200 baud
+•	Power up the unit
+•	Use help to show commands
+2. WiFi Setup
+•	Show WiFi status: wifi show
+•	Clear saved STA credentials: wifi reset
+3. Morse Code Trainer
+•	Set Trainer mode with the hardware switch
+•	Useful commands:
+•	koch start
+•	koch pause
+•	koch resume
+•	koch stop
+•	koch stat
+•	echo start
+•	echo stop
+•	key straight
+•	key iambic
+•	wpm 18
+•	buzzer on
+4. Memory Keyer
+•	Set CW Keyer mode with the hardware switch
+•	Check status with keyer
+•	Set speed with wpm XX
+•	Memory storage/playback is primarily controlled from the web page
+5. Quick Check
+•	status shows current settings
+•	help shows all commands
+If needed, a one-page printable version can be condensed further.
