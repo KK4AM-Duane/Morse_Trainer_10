@@ -40,12 +40,10 @@ static void handleApiStatus(AsyncWebServerRequest *request) {
   json += "\"sta_connected\":" + String(isSTAReady() ? "true" : "false") + ",";
 
   String modeStr;
-  if (currentMode == MorseMode::Progmem) {
-    modeStr = "PROGMEM";
-  } else if (currentMode == MorseMode::Progtable) {
-    modeStr = "PROGTABLE";
-  } else {
+  if (currentMode == MorseMode::Koch) {
     modeStr = "Koch";
+  } else {
+    modeStr = "Progtable";
   }
   json += "\"mode\":\"" + modeStr + "\",";
   json += "\"playing\":";
@@ -89,7 +87,7 @@ static void handleApiKochStats(AsyncWebServerRequest *request) {
   json += isKochActive() ? "true" : "false";
   json += ",\"wpm\":";
   json += String(WPM);
-  json += ",\"chars\":[";
+  json += ",\"chars:[";
 
   for (int i = 0; i < activeCount; i++) {
     if (i > 0) json += ',';

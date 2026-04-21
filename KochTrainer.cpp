@@ -93,8 +93,6 @@ static void beginPlayback() {
 void initKochTrainer() {
   // Set safe defaults first
   trainer.kochLesson      = 2;
-  trainer.charSpeed       = 20;
-  trainer.farnsworthSpeed = 10;
   trainer.sessionCorrect  = 0;
   trainer.sessionTotal    = 0;
   trainer.recentCorrect   = 0;
@@ -113,10 +111,7 @@ void initKochTrainer() {
 
   kochState = KochState::Idle;
   lastNvsSaveMs = millis();
-  nvsDirty = false;
-  maxLessonStreak  = 0;
-  gridSortedFlag   = false;
-  gridSortNotified = false;
+  // (rest unchanged)
 }
 
 // ── Character selection (weighted probability) ─────────────────────
@@ -704,8 +699,6 @@ void resetKochProgress() {
 
   // Reinitialize to defaults (same as initKochTrainer but explicit)
   trainer.kochLesson      = 2;
-  trainer.charSpeed       = 20;
-  trainer.farnsworthSpeed = 10;
   trainer.sessionCorrect  = 0;
   trainer.sessionTotal    = 0;
   trainer.recentCorrect   = 0;

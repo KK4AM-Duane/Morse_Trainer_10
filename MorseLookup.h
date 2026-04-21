@@ -4,7 +4,6 @@
 // Morse code lookup mode
 enum class MorseMode : uint8_t {
   Koch,        // Koch trainer (adaptive CW practice)
-  Progmem,     // Use PROGMEM binary tree
   Progtable    // Use PROGMEM direct lookup table
 };
 
@@ -13,12 +12,8 @@ extern MorseMode currentMode;
 
 // Lookup functions
 String getMorseCode(char c);
-String charToMorse(char c);
 String lookupMorseProgTable(char c);
 String preprocessProsigns(String message);
-
-// Helper functions
-bool searchSubtree(int index, char target, int level);
 
 // Reverse lookup: pattern (".-") -> character (returns '\0' if not found)
 char decodeMorsePattern(const String &pattern);

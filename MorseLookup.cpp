@@ -4,75 +4,6 @@
 // Global variables
 MorseMode currentMode = MorseMode::Koch;
 
-// Helper function to search subtree for character in PROGMEM table
-bool searchSubtree(int index, char target, int level) {
-  if (index < 0 || index >= MORSE_TABLE_LEN || level > 6) {
-    return false;
-  }
-  
-  char nodeChar = pgm_read_byte(&MORSE_TABLE[index]);
-  if (nodeChar == target) {
-    return true;
-  }
-  
-  if (level >= 6) {
-    return false;
-  }
-  
-  int leftChild = index - (1 << (MORSE_TREE_LEVELS - level - 1));
-  if (leftChild >= 0 && searchSubtree(leftChild, target, level + 1)) {
-    return true;
-  }
-  
-  int rightChild = index + (1 << (MORSE_TREE_LEVELS - level - 1));
-  if (rightChild < MORSE_TABLE_LEN && searchSubtree(rightChild, target, level + 1)) {
-    return true;
-  }
-  
-  return false;
-}
-
-// Convert character to morse code string using MORSE_TABLE binary tree in PROGMEM
-String charToMorse(char c) {
-  c = toupper(c);
-  String morse = "";
-  int index = MORSE_TREETOP;
-  
-  for (int level = 0; level <= 6; level++) {
-    char nodeChar = pgm_read_byte(&MORSE_TABLE[index]);
-    
-    if (nodeChar == c) {
-      return morse;
-    }
-    
-    if (level >= 6) {
-      break;
-    }
-    
-    int leftChild = index - (1 << (MORSE_TREE_LEVELS - level - 1));
-    if (leftChild >= 0 && leftChild < MORSE_TABLE_LEN) {
-      if (searchSubtree(leftChild, c, level + 1)) {
-        morse += '.';
-        index = leftChild;
-        continue;
-      }
-    }
-    
-    int rightChild = index + (1 << (MORSE_TREE_LEVELS - level - 1));
-    if (rightChild >= 0 && rightChild < MORSE_TABLE_LEN) {
-      if (searchSubtree(rightChild, c, level + 1)) {
-        morse += '-';
-        index = rightChild;
-        continue;
-      }
-    }
-    
-    break;
-  }
-  
-  return morse;
-}
-
 // Look up Morse code using PROGMEM direct lookup table
 String lookupMorseProgTable(char c) {
   c = toupper(c);
@@ -91,12 +22,9 @@ String lookupMorseProgTable(char c) {
 }
 
 // Get morse code based on current mode
+// (Always uses Progtable — mode distinction kept for Koch trainer logic)
 String getMorseCode(char c) {
-  if (currentMode == MorseMode::Koch || currentMode == MorseMode::Progtable) {
-    return lookupMorseProgTable(c);
-  } else {
-    return charToMorse(c);
-  }
+  return lookupMorseProgTable(c);
 }
 
 // Preprocess message to convert prosign sequences to single characters
@@ -164,7 +92,7 @@ char morseCanonical(char c) {
     case '<': return '&';
     // '(' and '$' (KN) both map to -.--.
     case '$': return '(';
-    // '{' (CT) and '*' (KA) both map to -.-.
+    // '{' (CT) and '*' (KA) both map to -.-.-
     case '*': return '{';
     default:  return c;
   }

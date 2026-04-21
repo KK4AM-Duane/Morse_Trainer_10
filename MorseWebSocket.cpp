@@ -82,10 +82,11 @@ void wsBroadcastStatus() {
     if (ws.count() == 0) return;
 
     String modeStr;
-    if (currentMode == MorseMode::Koch)             modeStr = "Koch";
-    else if (currentMode == MorseMode::Progmem)     modeStr = "PROGMEM";
-    else if (currentMode == MorseMode::Progtable)   modeStr = "PROGTABLE";
-    else                                             modeStr = "Vector";
+    if (currentMode == MorseMode::Koch) {
+      modeStr = "Koch";
+    } else {
+      modeStr = "Progtable";
+    }
 
     // Determine WiFi IP for the status payload
     String wifiIP;
@@ -422,10 +423,11 @@ static void handleIncomingMessage(AsyncWebSocketClient *client, const String &ms
   }
   else if (type == "get_status") {
     String modeStr;
-    if (currentMode == MorseMode::Koch)             modeStr = "Koch";
-    else if (currentMode == MorseMode::Progmem)     modeStr = "PROGMEM";
-    else if (currentMode == MorseMode::Progtable)   modeStr = "PROGTABLE";
-    else                                             modeStr = "Vector";
+    if (currentMode == MorseMode::Koch) {
+      modeStr = "Koch";
+    } else {
+      modeStr = "Progtable";
+    }
 
     String json = "{\"type\":\"status\""
                   ",\"wpm\":" + String(WPM) +

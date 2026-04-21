@@ -36,11 +36,14 @@ void showHelp() {
   Serial.println("  buzzer off  - Mute buzzer (phone audio only)");
   Serial.println("  wpm XX      - Set speed (e.g., 'wpm 18')");
   Serial.println("  wpm         - Show current speed");
-  Serial.println("  mode        - Cycle: Koch → Progmem → Progtable");
+  Serial.println("  mode        - Cycle: Koch → Progtable");
   Serial.println("  wifi show   - Show WiFi connection info");
   Serial.println("  wifi reset  - Clear saved WiFi credentials");
   Serial.println("  status      - Show current settings");
   Serial.println("  help        - Show this message");
+  Serial.println("  practice start <text> - Play text word-by-word");
+  Serial.println("  practice file  - Play from /practice.txt");
+  Serial.println("  practice stop  - Stop practice playback");
   Serial.println("\nDuring Koch training:");
   Serial.println("  Type a single letter to answer");
   Serial.println("  Press ESC or type 'stop' + Enter to quit");
@@ -69,12 +72,8 @@ void showStatus() {
     }
     Serial.println();
     Serial.printf("  Training: %s\n", isKochActive() ? "RUNNING" : "stopped");
-  } else if (currentMode == MorseMode::Progmem) {
-    Serial.println("PROGMEM (Binary Tree)");
-  } else if (currentMode == MorseMode::Progtable) {
-    Serial.println("PROGTABLE (Direct Lookup)");
   } else {
-    Serial.println("Vector (Dynamic)");
+    Serial.println("Progtable (Direct Lookup)");
   }
   Serial.print("Echo training: ");
   if (isEchoActive()) {
@@ -145,32 +144,23 @@ static void showKochStats() {
   Serial.println();
 }
 
-// Toggle mode - cycles through remaining modes
+// Toggle mode - simplified to Koch ↔ Progtable only
 void toggleMode() {
   // Stop Koch session if leaving Koch mode
   if (currentMode == MorseMode::Koch && isKochActive()) {
     stopKochSession();
   }
 
-  String modeMessage;
-  
   if (currentMode == MorseMode::Koch) {
-    currentMode = MorseMode::Progmem;
-    Serial.println("Switched to PROGMEM mode (binary tree lookup)");
-    modeMessage = "PROGMEM";
-  } else if (currentMode == MorseMode::Progmem) {
     currentMode = MorseMode::Progtable;
-    Serial.println("Switched to PROGTABLE mode (direct lookup table)");
-    modeMessage = "PROGTABLE";
+    Serial.println("Switched to Progtable mode (freeform text)\n");
+    startTransmission("PROGTABLE");
   } else {
     currentMode = MorseMode::Koch;
     Serial.println("Switched to Koch Trainer mode");
-    Serial.println("  Type 'koch start' to begin a session.");
-    modeMessage = "KOCH";
+    Serial.println("  Type 'koch start' to begin a session.\n");
+    startTransmission("KOCH");
   }
-  
-  Serial.println();
-  startTransmission(modeMessage);
 }
 
 // Set WPM
@@ -407,6 +397,21 @@ void processCommand(String command) {
     } else {
       setEchoCharSource(EchoCharSource::Full);
     }
+  }
+  // --- Practice sub-commands ---
+  else if (command.equalsIgnoreCase("practice start")) {
+    String text = command.substring(15);  // text after "practice start "
+    if (text.length() > 0) {
+      startPractice(text);
+    } else {
+      Serial.println("Usage: practice start <text>");
+    }
+  }
+  else if (command.equalsIgnoreCase("practice file")) {
+    startPracticeFromFile();
+  }
+  else if (command.equalsIgnoreCase("practice stop")) {
+    stopPractice();
   }
   else {
     Serial.println("Unknown command. Type 'help' for options.\n");
